@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://boboox.github.com">
-  <title>波波张的个人工作日记</title>
+  <title>Git 常用命令 | 波波张的个人工作日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1git clone">
+  <meta name="description" content="1git clone [库地址]
+git remote add [库别名] [库地址]git remote rm [库别名]git push [库别名] [分支]git statusgit cache -rm
+#分支管理git branch 查看所有分支git branch dev 创建分支git checkout -b develop master 创建+切换分支git checkout mas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="波波张的个人工作日记">
+<meta property="og:title" content="Git 常用命令">
 <meta property="og:url" content="http://boboox.github.com/2016/10/20/cmd/git/index.html">
 <meta property="og:site_name" content="波波张的个人工作日记">
-<meta property="og:description" content="1git clone">
-<meta property="og:updated_time" content="2016-10-20T04:04:39.000Z">
+<meta property="og:description" content="1git clone [库地址]
+git remote add [库别名] [库地址]git remote rm [库别名]git push [库别名] [分支]git statusgit cache -rm
+#分支管理git branch 查看所有分支git branch dev 创建分支git checkout -b develop master 创建+切换分支git checkout mas">
+<meta property="og:updated_time" content="2016-11-03T01:20:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="波波张的个人工作日记">
-<meta name="twitter:description" content="1git clone">
+<meta name="twitter:title" content="Git 常用命令">
+<meta name="twitter:description" content="1git clone [库地址]
+git remote add [库别名] [库地址]git remote rm [库别名]git push [库别名] [分支]git statusgit cache -rm
+#分支管理git branch 查看所有分支git branch dev 创建分支git checkout -b develop master 创建+切换分支git checkout mas">
   
     <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
   
@@ -37,7 +43,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img src="/assets/blogImg/litten.png" class="js-avatar">
+			<img src="/img/bobozhang.jpg" class="js-avatar">
 			
 		</a>
 
@@ -80,11 +86,11 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="https://github.com/litten" title="github">github</a>
+					<a class="github" target="_blank" href="http://boboox.github.com" title="github">github</a>
 		        
-					<a class="weibo" target="_blank" href="http://weibo.com/litten225" title="weibo">weibo</a>
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
 		        
-					<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
 		        
 			</div>
 		</nav>
@@ -102,7 +108,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				
-					<img src="/assets/blogImg/litten.png" class="js-avatar">
+					<img src="/img/bobozhang.jpg" class="js-avatar">
 				
 			</div>
 			<hgroup>
@@ -121,11 +127,11 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/litten" title="github">github</a>
+						<a class="github" target="_blank" href="http://boboox.github.com" title="github">github</a>
 			        
-						<a class="weibo" target="_blank" href="http://weibo.com/litten225" title="weibo">weibo</a>
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
 			        
-						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
 			        
 				</div>
 			</nav>
@@ -140,9 +146,25 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git 常用命令
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span></div></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> [库地址]</div></pre></td></tr></table></figure>
+<p>git remote add [库别名] [库地址]<br>git remote rm [库别名]<br>git push [库别名] [分支]<br>git status<br>git cache -rm</p>
+<p>#分支管理<br>git branch 查看所有分支<br>git branch dev 创建分支<br>git checkout -b develop master 创建+切换分支<br>git checkout master 切换到Master分支<br>git checkout -filename.txt 丢弃工作区修改( - 很重要)<br>git banch -d bug 删除分支<br>git merge –no-ff develop  将develop分支合并到当前分支git</p>
+<p>#工作区<br>git stash 挂起工作区.<br>git stash list 查看挂起的工作区<br>git stash pop 回复工作区内容并删除记录</p>
+<p>#版本回退<br>git reset -hard HEAD^ 上一个版本<br>git reset -hard HEAD^^ 上两个版本<br>git reset -hard HEAD~100 上100个版本<br>git reset -hard [版本号] 指定版本号</p>
+<p>#bug修复的流程<br>git checkout -b [分支名<em>] //在需要开分支的分支上<br>…修改,提交git<br>切换回主分支<br>git merge –no-ff [分支名</em>]</p>
+
       
     </div>
     <div class="article-info article-info-index">
@@ -193,26 +215,6 @@
 
 
 
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="cmd/git" data-title="" data-url="http://boboox.github.com/2016/10/20/cmd/git/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"litten-hexo"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
 
 
@@ -284,7 +286,7 @@
     
     	<section class="tools-section tools-section-me">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">Litten，&lt;br&gt;毕业于华科，就职于鹅厂&lt;br&gt;&lt;br&gt;热爱大海与冷笑话，&lt;br/&gt;目前是一枚前端&lt;br/&gt;&lt;br/&gt;胆小认生，不易相处，&lt;br&gt;年轻无为，卖马为生。</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">BoboZhang，&lt;br&gt;毕业于杭电，史称电大的&lt;br&gt;&lt;br&gt;专注减肥20多年,从未放弃，&lt;br/&gt;目前是一枚前端&lt;br/&gt;&lt;br/&gt;智慧,美貌,金钱&lt;br&gt;我,都没有。</div>
   	  	
     	</section>
     

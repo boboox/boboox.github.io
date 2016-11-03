@@ -6,14 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://boboox.github.com">
-  <title>波波张的个人工作日记</title>
+  <title>MarkDown 使用指南 | 波波张的个人工作日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="波波张的个人工作日记">
-<meta property="og:url" content="http://boboox.github.com/index.html">
+  <meta name="description" content="概述Markdown 语法的目标是：成为一种适用于网络的书写语言。Markdown 不是想要取代 HTML，甚至也没有要和它相近,它的语法种类很少,只对应 HTML 标记的一小部分Markdown 的理念是,能让文档更容易读写与修改.不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了.
+由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MarkDown 使用指南">
+<meta property="og:url" content="http://boboox.github.com/2016/10/13/markdown-guide/index.html">
 <meta property="og:site_name" content="波波张的个人工作日记">
+<meta property="og:description" content="概述Markdown 语法的目标是：成为一种适用于网络的书写语言。Markdown 不是想要取代 HTML，甚至也没有要和它相近,它的语法种类很少,只对应 HTML 标记的一小部分Markdown 的理念是,能让文档更容易读写与修改.不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了.
+由">
+<meta property="og:image" content="http://boboox.github.com/img/bobozhang.jpg">
+<meta property="og:image" content="http://boboox.github.com/img/bobozhang.jpg">
+<meta property="og:image" content="http://boboox.github.com/img/bobozhang.jpg">
+<meta property="og:updated_time" content="2016-11-03T04:25:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="波波张的个人工作日记">
+<meta name="twitter:title" content="MarkDown 使用指南">
+<meta name="twitter:description" content="概述Markdown 语法的目标是：成为一种适用于网络的书写语言。Markdown 不是想要取代 HTML，甚至也没有要和它相近,它的语法种类很少,只对应 HTML 标记的一小部分Markdown 的理念是,能让文档更容易读写与修改.不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了.
+由">
+<meta name="twitter:image" content="http://boboox.github.com/img/bobozhang.jpg">
   
     <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
   
@@ -130,9 +141,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-cmd/git" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-markdown-guide" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -141,94 +150,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/20/cmd/git/">Git 常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> [库地址]</div></pre></td></tr></table></figure>
-<p>git remote add [库别名] [库地址]<br>git remote rm [库别名]<br>git push [库别名] [分支]<br>git status<br>git cache -rm</p>
-<p>#分支管理<br>git branch 查看所有分支<br>git branch dev 创建分支<br>git checkout -b develop master 创建+切换分支<br>git checkout master 切换到Master分支<br>git checkout -filename.txt 丢弃工作区修改( - 很重要)<br>git banch -d bug 删除分支<br>git merge –no-ff develop  将develop分支合并到当前分支git</p>
-<p>#工作区<br>git stash 挂起工作区.<br>git stash list 查看挂起的工作区<br>git stash pop 回复工作区内容并删除记录</p>
-<p>#版本回退<br>git reset -hard HEAD^ 上一个版本<br>git reset -hard HEAD^^ 上两个版本<br>git reset -hard HEAD~100 上100个版本<br>git reset -hard [版本号] 指定版本号</p>
-<p>#bug修复的流程<br>git checkout -b [分支名<em>] //在需要开分支的分支上<br>…修改,提交git<br>切换回主分支<br>git merge –no-ff [分支名</em>]</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/10/20/cmd/git/" class="archive-article-date">
-  	<time datetime="2016-10-20T04:04:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-20</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-vue" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.b</span>&#123;</div><div class="line">	<span class="attribute">height</span>: <span class="number">100</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/10/20/vue/" class="archive-article-date">
-  	<time datetime="2016-10-20T03:48:58.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-20</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-markdown-guide" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/13/markdown-guide/">MarkDown 使用指南</a>
+    <h1 class="article-title" itemprop="name">
+      MarkDown 使用指南
     </h1>
   
 
@@ -345,17 +268,48 @@ tab
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/20/vue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
   
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
 
 
       </div>
@@ -377,8 +331,8 @@ tab
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -132,6 +132,105 @@
       <div class="body-wrap">
         
   
+    <article id="post-cmd/nvm-install" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/10/cmd/nvm-install/">nvm的安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在运行一个demo项目的时候,发现项目需要nodejs v6+的运行环境,而本机的环境是v4,<br>但是自己的项目都是在v4的环境下开发的.不想太贸然将全局的node升级到最新,<br>所以就需要安装 一个nvm (<em>nodejs version management</em>)</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>本安装环境都是在mac下</p>
+<p>通过curl安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh</div></pre></td></tr></table></figure>
+<p>然后在 ~/.bash_profile 中加上</p>
+<blockquote>
+<p>export NVM_DIR=”$HOME/.nvm”<br>[ -s “$NVM_DIR/nvm.sh” ] &amp;&amp; . “$NVM_DIR/nvm.sh” # This loads nvm</p>
+</blockquote>
+<p>目的是为了在每次打开bash的时候,会在环境变量中自动添加nvm</p>
+<p>完毕之后运行nvm 查看能看到帮助信息说明安装成功,<br>如果提示,</p>
+<blockquote>
+<p>nvm:command not found </p>
+</blockquote>
+<p>可能是缺少~/.bash_profile 文件,运行 touch ~/.bash_profile 然后重新走一遍.</p>
+<p>如果依然不行,尝试在bash_profile文件中添加一行 source ~/.bashrc后再尝试,</p>
+<p>安装好后,运行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm ls-remote.</div></pre></td></tr></table></figure>
+<p>查看可以安装的node版本</p>
+<h3 id="安装指定版本"><a href="#安装指定版本" class="headerlink" title="安装指定版本"></a>安装指定版本</h3><p>运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm install v6.9.1 <span class="comment">#安装6.9.1版本</span></div></pre></td></tr></table></figure>
+<p>正常情况下就可以安装成功</p>
+<p>然后使用命令切换当前使用的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm use v6.9.1</div></pre></td></tr></table></figure>
+<p>本来一切都应该如此简单美好<br>但是….<br>偏偏遇到了错误…</p>
+<h3 id="遇到坑"><a href="#遇到坑" class="headerlink" title="遇到坑"></a>遇到坑</h3><p>在执行install命令的时候,发出了错误(我是先安装4.6.1)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Computing checksum with shasum <span class="_">-a</span> 256</div><div class="line">Checksums <span class="keyword">do</span> not match: <span class="string">'\9c2bfd4bef37e1528982273f366fbc4191bd6705f2913f9c1a8646a23b807a06'</span> found, <span class="string">'e5929de3a963f9a75c5923c9c222cde401e03c4b4991ec9281bf81f878f482ff'</span> expected.</div><div class="line">Binary download failed, trying source.</div><div class="line">Detected that you have 4 CPU thread(s)</div><div class="line">Set the number of <span class="built_in">jobs</span> to 4 - 1 = 3 <span class="built_in">jobs</span> to speed up the build</div><div class="line"><span class="comment">######################################################################## 100.0%</span></div><div class="line">Computing checksum with shasum <span class="_">-a</span> 256</div><div class="line">Checksums <span class="keyword">do</span> not match: <span class="string">'\317a229267977a8f20b5fe81e40b044dfc4ac8ff79a219727214b71a6da711d7'</span> found, <span class="string">'b8ca4db42c5a1fed95baf6996ff776db3c95ad2bcf73c7aed2f1f921a1225de3'</span> expected.</div><div class="line">nvm: install v4.6.1 failed!</div></pre></td></tr></table></figure>
+<p>看错误的意思是在做签名比对的时候失败了.二进制文件下载失败<br>然后开始下载源码,然后下载源码的时候也挂了.<br>期初以为是网络问题.但是切换各种网络都是一样的结果.</p>
+<blockquote>
+<p>这里的100%的进度不是一点点加载的 ,是瞬间出来,感觉其实根本没有发生下载直接发生了错误</p>
+</blockquote>
+<p>去看过官方的issue,确实有人有类似的问题,他们提供的解决思路</p>
+<ul>
+<li>如果网络设置了代理,会导致这种错误,可以尝试去掉代理</li>
+<li>虚拟机的环境下也会导致失败</li>
+</ul>
+<p>然后默默的干掉了代理,信心满满,原来真的是网络问题.重新跑了一次install,<br>OMG 还是一样的错误…</p>
+<p>google的许久都是没有结果.</p>
+<p>但是在不停的尝试中发现,<br>不用mac自带的终端,使用iterm2 去执行install的进度条是会一点点加载的,说明确实有在下载,<br>然后下载到一定的时候依然发生错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">curl: (56) SSLRead() <span class="built_in">return</span> error -9806</div><div class="line">Binary download from https://nodejs.org/dist/v4.6.1/node-v4.6.1-darwin-x64.tar.gz failed, trying source.</div><div class="line">grep: /Users/zhangjunbin/.nvm/.cache/bin/node-v4.6.1-darwin-x64/node-v4.6.1-darwin-x64.tar.gz: No such file or directory</div><div class="line">Provided file to checksum does not exist.</div><div class="line">Binary download failed, trying source.</div></pre></td></tr></table></figure>
+<p>可以看出来,其实就是去下载node-v4.6.1-darwin-x64.tar.gz的包,<br>然后放在/Users/zhangjunbin/.nvm/.cache/bin/node-v4.6.1-darwin-x64/下<br>于是就有了如下的尝试</p>
+<blockquote>
+<p>去官网下载对应版本的对应文件,放到如上所示的目录(失败的情况下该目录需要自己创建)</p>
+</blockquote>
+<p>当完成了bin的文件,丢进去后 checksum的错误没有了.但是还是失败(需要再下一次source,/src)<br>再下载一次相应的文件<br>丢到了/Users/zhangjunbin/.nvm/.cache/src/下<br>再运行一次 install</p>
+<p>就安装成功了 ^_^</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/10/cmd/nvm-install/" class="archive-article-date">
+  	<time datetime="2016-11-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-10</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/其他/">其他</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-fitness/DOMS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -467,7 +566,7 @@ tab
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
+    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
     			</div>
     	</section>
     

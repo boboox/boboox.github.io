@@ -6,24 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://boboox.github.com">
-  <title>你不知道的DOMS | 波波张的个人工作日记</title>
+  <title>nvm的安装 | 波波张的个人工作日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天了解到一个新的知识,然后他又有一个非常熟悉的名字叫做DOMS,乍一看,太熟悉不过了,Document Object Model 嘛~但是今天的主题不是技术
-
-总描述不出的那个词健身多年,对健身的知识的了解也是零零散散,懂一些,但是都形不成系统的理论,更有些东西明明知道肯定会有一个专业的学术名词去定义,但是自己无法准确的描述出来,好多次尝试去百度,但是得到的结果都不是想要的.直到上个礼拜某一天">
+  <meta name="description" content="前言在运行一个demo项目的时候,发现项目需要nodejs v6+的运行环境,而本机的环境是v4,但是自己的项目都是在v4的环境下开发的.不想太贸然将全局的node升级到最新,所以就需要安装 一个nvm (nodejs version management)
+安装本安装环境都是在mac下
+通过curl安装
+1curl -o- https://raw.githubusercontent.com/cr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你不知道的DOMS">
-<meta property="og:url" content="http://boboox.github.com/2016/11/06/fitness/DOMS/index.html">
+<meta property="og:title" content="nvm的安装">
+<meta property="og:url" content="http://boboox.github.com/2016/11/10/cmd/nvm-install/index.html">
 <meta property="og:site_name" content="波波张的个人工作日记">
-<meta property="og:description" content="今天了解到一个新的知识,然后他又有一个非常熟悉的名字叫做DOMS,乍一看,太熟悉不过了,Document Object Model 嘛~但是今天的主题不是技术
-
-总描述不出的那个词健身多年,对健身的知识的了解也是零零散散,懂一些,但是都形不成系统的理论,更有些东西明明知道肯定会有一个专业的学术名词去定义,但是自己无法准确的描述出来,好多次尝试去百度,但是得到的结果都不是想要的.直到上个礼拜某一天">
-<meta property="og:updated_time" content="2016-11-05T15:43:01.000Z">
+<meta property="og:description" content="前言在运行一个demo项目的时候,发现项目需要nodejs v6+的运行环境,而本机的环境是v4,但是自己的项目都是在v4的环境下开发的.不想太贸然将全局的node升级到最新,所以就需要安装 一个nvm (nodejs version management)
+安装本安装环境都是在mac下
+通过curl安装
+1curl -o- https://raw.githubusercontent.com/cr">
+<meta property="og:updated_time" content="2016-11-10T09:21:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你不知道的DOMS">
-<meta name="twitter:description" content="今天了解到一个新的知识,然后他又有一个非常熟悉的名字叫做DOMS,乍一看,太熟悉不过了,Document Object Model 嘛~但是今天的主题不是技术
-
-总描述不出的那个词健身多年,对健身的知识的了解也是零零散散,懂一些,但是都形不成系统的理论,更有些东西明明知道肯定会有一个专业的学术名词去定义,但是自己无法准确的描述出来,好多次尝试去百度,但是得到的结果都不是想要的.直到上个礼拜某一天">
+<meta name="twitter:title" content="nvm的安装">
+<meta name="twitter:description" content="前言在运行一个demo项目的时候,发现项目需要nodejs v6+的运行环境,而本机的环境是v4,但是自己的项目都是在v4的环境下开发的.不想太贸然将全局的node升级到最新,所以就需要安装 一个nvm (nodejs version management)
+安装本安装环境都是在mac下
+通过curl安装
+1curl -o- https://raw.githubusercontent.com/cr">
   
     <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
   
@@ -140,7 +143,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-fitness/DOMS" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-cmd/nvm-install" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -150,7 +153,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      你不知道的DOMS
+      nvm的安装
     </h1>
   
 
@@ -158,49 +161,69 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>今天了解到一个新的知识,然后他又有一个非常熟悉的名字叫做DOMS,乍一看,太熟悉不过了,Document Object Model 嘛~<br>但是今天的主题不是技术</p>
-</blockquote>
-<h3 id="总描述不出的那个词"><a href="#总描述不出的那个词" class="headerlink" title="总描述不出的那个词"></a>总描述不出的那个词</h3><p>健身多年,对健身的知识的了解也是零零散散,懂一些,但是都形不成系统的理论,更有些东西明明知道肯定会有一个专业的学术名词去定义,<br>但是自己无法准确的描述出来,好多次尝试去百度,但是得到的结果都不是想要的.直到上个礼拜某一天,在一片文章里面看到一个名词</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在运行一个demo项目的时候,发现项目需要nodejs v6+的运行环境,而本机的环境是v4,<br>但是自己的项目都是在v4的环境下开发的.不想太贸然将全局的node升级到最新,<br>所以就需要安装 一个nvm (<em>nodejs version management</em>)</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>本安装环境都是在mac下</p>
+<p>通过curl安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh</div></pre></td></tr></table></figure>
+<p>然后在 ~/.bash_profile 中加上</p>
 <blockquote>
-<p>DOMS(delayed onset muscle soreness),延迟性肌肉疼痛,</p>
+<p>export NVM_DIR=”$HOME/.nvm”<br>[ -s “$NVM_DIR/nvm.sh” ] &amp;&amp; . “$NVM_DIR/nvm.sh” # This loads nvm</p>
 </blockquote>
-<p>瞬间我就意识到,这个就是困扰我好久但是就是将不出来的那个”学术名词”.经过一番百度谷歌,对此物做一记录.</p>
-<h3 id="延迟性肌肉疼痛"><a href="#延迟性肌肉疼痛" class="headerlink" title="延迟性肌肉疼痛"></a>延迟性肌肉疼痛</h3><p>延迟性肌肉疼痛,也称为<em>肌发热</em>,是在非经常性运动或者剧烈运动之后的几小时到几天内肌肉感到酸痛或疼痛,<br>这种酸痛运动后在24小时到72小时会达到高峰</p>
-<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><p>在发生酸痛的肌肉会使肌肉迟钝,伴随着压痛,但是疼痛只有在肌肉发生拉伸或者收缩,静止的肌肉不会感到疼痛,<br>在百科上,这称作”肌肉机械痛觉过敏”.</p>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>产生这种酸痛的最主要原因是因为肌肉做<strong>离心(延展)运动</strong>而产生的</p>
+<p>目的是为了在每次打开bash的时候,会在环境变量中自动添加nvm</p>
+<p>完毕之后运行nvm 查看能看到帮助信息说明安装成功,<br>如果提示,</p>
 <blockquote>
-<p>离心运动:(待完善)</p>
+<p>nvm:command not found </p>
 </blockquote>
-<p><strong>等距(静态)运动</strong>产生的酸痛较少,</p>
+<p>可能是缺少~/.bash_profile 文件,运行 touch ~/.bash_profile 然后重新走一遍.</p>
+<p>如果依然不行,尝试在bash_profile文件中添加一行 source ~/.bashrc后再尝试,</p>
+<p>安装好后,运行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm ls-remote.</div></pre></td></tr></table></figure>
+<p>查看可以安装的node版本</p>
+<h3 id="安装指定版本"><a href="#安装指定版本" class="headerlink" title="安装指定版本"></a>安装指定版本</h3><p>运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm install v6.9.1 <span class="comment">#安装6.9.1版本</span></div></pre></td></tr></table></figure>
+<p>正常情况下就可以安装成功</p>
+<p>然后使用命令切换当前使用的版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nvm use v6.9.1</div></pre></td></tr></table></figure>
+<p>本来一切都应该如此简单美好<br>但是….<br>偏偏遇到了错误…</p>
+<h3 id="遇到坑"><a href="#遇到坑" class="headerlink" title="遇到坑"></a>遇到坑</h3><p>在执行install命令的时候,发出了错误(我是先安装4.6.1)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Computing checksum with shasum <span class="_">-a</span> 256</div><div class="line">Checksums <span class="keyword">do</span> not match: <span class="string">'\9c2bfd4bef37e1528982273f366fbc4191bd6705f2913f9c1a8646a23b807a06'</span> found, <span class="string">'e5929de3a963f9a75c5923c9c222cde401e03c4b4991ec9281bf81f878f482ff'</span> expected.</div><div class="line">Binary download failed, trying source.</div><div class="line">Detected that you have 4 CPU thread(s)</div><div class="line">Set the number of <span class="built_in">jobs</span> to 4 - 1 = 3 <span class="built_in">jobs</span> to speed up the build</div><div class="line"><span class="comment">######################################################################## 100.0%</span></div><div class="line">Computing checksum with shasum <span class="_">-a</span> 256</div><div class="line">Checksums <span class="keyword">do</span> not match: <span class="string">'\317a229267977a8f20b5fe81e40b044dfc4ac8ff79a219727214b71a6da711d7'</span> found, <span class="string">'b8ca4db42c5a1fed95baf6996ff776db3c95ad2bcf73c7aed2f1f921a1225de3'</span> expected.</div><div class="line">nvm: install v4.6.1 failed!</div></pre></td></tr></table></figure>
+<p>看错误的意思是在做签名比对的时候失败了.二进制文件下载失败<br>然后开始下载源码,然后下载源码的时候也挂了.<br>期初以为是网络问题.但是切换各种网络都是一样的结果.</p>
 <blockquote>
-<p>等距运动:(待完善)</p>
+<p>这里的100%的进度不是一点点加载的 ,是瞬间出来,感觉其实根本没有发生下载直接发生了错误</p>
 </blockquote>
-<p><strong>而同心(缩短)运动</strong>基本不会产生酸痛.</p>
+<p>去看过官方的issue,确实有人有类似的问题,他们提供的解决思路</p>
+<ul>
+<li>如果网络设置了代理,会导致这种错误,可以尝试去掉代理</li>
+<li>虚拟机的环境下也会导致失败</li>
+</ul>
+<p>然后默默的干掉了代理,信心满满,原来真的是网络问题.重新跑了一次install,<br>OMG 还是一样的错误…</p>
+<p>google的许久都是没有结果.</p>
+<p>但是在不停的尝试中发现,<br>不用mac自带的终端,使用iterm2 去执行install的进度条是会一点点加载的,说明确实有在下载,<br>然后下载到一定的时候依然发生错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">curl: (56) SSLRead() <span class="built_in">return</span> error -9806</div><div class="line">Binary download from https://nodejs.org/dist/v4.6.1/node-v4.6.1-darwin-x64.tar.gz failed, trying source.</div><div class="line">grep: /Users/zhangjunbin/.nvm/.cache/bin/node-v4.6.1-darwin-x64/node-v4.6.1-darwin-x64.tar.gz: No such file or directory</div><div class="line">Provided file to checksum does not exist.</div><div class="line">Binary download failed, trying source.</div></pre></td></tr></table></figure>
+<p>可以看出来,其实就是去下载node-v4.6.1-darwin-x64.tar.gz的包,<br>然后放在/Users/zhangjunbin/.nvm/.cache/bin/node-v4.6.1-darwin-x64/下<br>于是就有了如下的尝试</p>
 <blockquote>
-<p>同心运动:(待完善)</p>
+<p>去官网下载对应版本的对应文件,放到如上所示的目录(失败的情况下该目录需要自己创建)</p>
 </blockquote>
-<p>在之前的知识体系中,我总以为引起酸痛是因为肌肉中乳酸的堆积.但是事实上血液中的乳酸并未增加<br><strong>(长久不动或者超负荷的运动会使得肌肉的血液中堆积大量的乳酸,也会产生酸痛的感觉)</strong></p>
-<h4 id="治疗与预防"><a href="#治疗与预防" class="headerlink" title="治疗与预防"></a>治疗与预防</h4><p>对于疼痛的治疗,大家的直觉都是休息,<br>而延迟性肌肉酸痛的治疗却是反直觉的,<br>即增加血液流向肌肉,继续锻炼,使用更轻的重量,多组数,低强度的拉伸.对缓解疼痛都有帮助,也有助于提高肌肉的痛阈和耐痛.<br>在实际的健身中也会有明显的感觉.如果越是怕痛越不敢动,往往只能等待痛疼消失.<br>而尝试的去做低负荷的运动,按摩,或者热水浴,都会有助于缓解疼痛</p>
-<p>目前并没有非常有效的预防方法,但是实践证明.<br>适度的拉伸(过度拉伸也会导致疼痛),有效的热身,和有计划的健身,都能够避免或者减少DOMS的发生</p>
+<p>当完成了bin的文件,丢进去后 checksum的错误没有了.但是还是失败(需要再下一次source,/src)<br>再下载一次相应的文件<br>丢到了/Users/zhangjunbin/.nvm/.cache/src/下<br>再运行一次 install</p>
+<p>就安装成功了 ^_^</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/06/fitness/DOMS/" class="archive-article-date">
-  	<time datetime="2016-11-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-06</time>
+      <a href="/2016/11/10/cmd/nvm-install/" class="archive-article-date">
+  	<time datetime="2016-11-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-10</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/理论/">理论</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 	</div>
 
       
 	<div class="article-category tagcloud">
 	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/健身/">健身</a>
+	<a class="article-category-link" href="/categories/其他/">其他</a>
 	</div>
 
 
@@ -212,18 +235,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/10/cmd/nvm-install/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          nvm的安装
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/01/markdown-guide/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MarkDown 使用指南</div>
+    <a href="/2016/11/06/fitness/DOMS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你不知道的DOMS</div>
       <i class="icon-circle-right"></i>
     </a>
   

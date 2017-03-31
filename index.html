@@ -323,15 +323,15 @@
 <h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><p>在发生酸痛的肌肉会使肌肉迟钝,伴随着压痛,但是疼痛只有在肌肉发生拉伸或者收缩,静止的肌肉不会感到疼痛,<br>在百科上,这称作”肌肉机械痛觉过敏”.</p>
 <h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>产生这种酸痛的最主要原因是因为肌肉做<strong>离心(延展)运动</strong>而产生的</p>
 <blockquote>
-<p>离心运动:(待完善)</p>
-</blockquote>
-<p><strong>等距(静态)运动</strong>产生的酸痛较少,</p>
-<blockquote>
-<p>等距运动:(待完善)</p>
+<p>离心运动:(Eccentric Muscle Action)肌肉收缩力量小于外在负荷的阻抗力量,肌肉被拉长,此时肌肉产生的力量小于外在负荷伸展肌腱的力量.举重训练时动作向下阶段为离心运动,在标准运动中,肌肉离心运动是为了抵抗负荷向下的重力加速度.所有希望产生离心运动时,必须稳定的阻抗向下负荷而非速度放下.</p>
 </blockquote>
 <p><strong>而同心(缩短)运动</strong>基本不会产生酸痛.</p>
 <blockquote>
-<p>同心运动:(待完善)</p>
+<p>同心运动:(Concentric Muscle Action)肌肉收缩力量大于外在负荷的阻抗力量时时,肌肉缩短,肌肉产生的力量大于外在负荷伸展肌腱的力量,游泳,单车等肌肉都是做向心运动</p>
+</blockquote>
+<p><strong>等距(静态)运动</strong>产生的酸痛较少,</p>
+<blockquote>
+<p>等距运动:(Isometric Muscle Action)肌肉收缩力量等于外在负荷的阻抗力量,肌肉长度维持不变,此时肌肉产生的力量等于外在阻抗伸展肌腱的量.仰卧起坐,上身卷举45°然后固定不动时,肌肉等长收缩相对的,上半身向上卷起时,为向心运动;上半身向下放平时,则为离心运动.</p>
 </blockquote>
 <p>在之前的知识体系中,我总以为引起酸痛是因为肌肉中乳酸的堆积.但是事实上血液中的乳酸并未增加<br><strong>(长久不动或者超负荷的运动会使得肌肉的血液中堆积大量的乳酸,也会产生酸痛的感觉)</strong></p>
 <h4 id="治疗与预防"><a href="#治疗与预防" class="headerlink" title="治疗与预防"></a>治疗与预防</h4><p>对于疼痛的治疗,大家的直觉都是休息,<br>而延迟性肌肉酸痛的治疗却是反直觉的,<br>即增加血液流向肌肉,继续锻炼,使用更轻的重量,多组数,低强度的拉伸.对缓解疼痛都有帮助,也有助于提高肌肉的痛阈和耐痛.<br>在实际的健身中也会有明显的感觉.如果越是怕痛越不敢动,往往只能等待痛疼消失.<br>而尝试的去做低负荷的运动,按摩,或者热水浴,都会有助于缓解疼痛</p>
@@ -538,11 +538,20 @@ tab
     <div class="article-entry" itemprop="articleBody">
       
         <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> [库地址]</div></pre></td></tr></table></figure>
-<p>git remote add [库别名] [库地址]<br>git remote rm [库别名]<br>git push [库别名] [分支]<br>git status<br>git cache -rm</p>
-<p>#分支管理<br>git branch 查看所有分支<br>git branch dev 创建分支<br>git checkout -b develop master 创建+切换分支<br>git checkout master 切换到Master分支<br>git checkout -filename.txt 丢弃工作区修改( - 很重要)<br>git banch -d bug 删除分支<br>git merge –no-ff develop  将develop分支合并到当前分支git</p>
+<p>git 命令行操作<br>git add -i(interactive) 交互式暂存</p>
+<p>git remote add [库别名] [库地址]<br>git remote rm [库别名]<br>git remote -v 查看<br>git push [库别名] [分支]<br>git push [库别名] [分支] –tags<br>git status<br>git cache -rm</p>
+<p>git pull ==&gt;<br>git fetch + git merge<br>如果需要以rebase的方式,需要使用<br>git pull –rebase</p>
+<p>#分支管理<br>git branch 查看所有本地分支<br>git branch -a 查看所有分支<br>git branch -r 查看远程分支<br>git branch dev 创建分支<br>git checkout -b develop master 创建+切换分支<br>git checkout master 切换到Master分支<br>git checkout -filename.txt 丢弃工作区修改( - 很重要)<br>git banch -d bug 删除分支<br>git merge –no-ff develop  将develop分支合并到当前分支git</p>
 <p>#工作区<br>git stash 挂起工作区.<br>git stash list 查看挂起的工作区<br>git stash pop 回复工作区内容并删除记录</p>
-<p>#版本回退<br>git reset -hard HEAD^ 上一个版本<br>git reset -hard HEAD^^ 上两个版本<br>git reset -hard HEAD~100 上100个版本<br>git reset -hard [版本号] 指定版本号</p>
-<p>#bug修复的流程<br>git checkout -b [分支名<em>] //在需要开分支的分支上<br>…修改,提交git<br>切换回主分支<br>git merge –no-ff [分支名</em>]</p>
+<p>#版本回退<br>git reset –hard HEAD^ 上一个版本<br>git reset –hard HEAD^^ 上两个版本<br>git reset –hard HEAD~100 上100个版本<br>git reset –hard [版本号] 指定版本号<br>reset之后 在指定版本后的commit会无法再log中显示,但是依然可以追踪<br>推荐使用revert 回退到指定版本的文件状态,可能会遇到冲突,完成冲突之后产生一个新的提交<br>git revert [commit*]<br>在发生冲突之后记得使用 –continue 继续或者使用 –quit/abort 取消回退<br>!!!<br>revert 是回退到这个版本提交之前的内容<br>reset 是回退到这个版本提交之后的样子</p>
+<p>#bug修复的流程<br>git checkout -b [分支名<em>] //在需要开分支的分支上<br>…修改,提交git<br>切换回主分支<br>git merge –no-ff [分支名</em>]<br>必须带上–no-ff 为了版本演进清晰</p>
+<p>#分支冲突解决流程</p>
+<p>#git rebase<br>git checkout [分支名<em>(在开发的,最新的)]<br>git rebase [分支名</em>]</p>
+<p>git rebase –continue 发生冲突之后,解决完继续<br>git rebase –abort 停止rebase</p>
+<p>#git tag</p>
+<p>git tag -a [tag 名称] [commit Hash] 新建tag并且需要备注<br>如果加上 -m ‘xxxx’ 可以直接完成备注<br>git tag -d [tag 名称] 删除tag 删除本地的</p>
+<p>git push –tags 推送tags 到远端<br>git push origin –delete tag [tag 名称] 删除远端tag</p>
+<p>#查看已经commit未push的commit<br>git cherry -v<br>git log [分支名] ^origin/[分支名]</p>
 
       
     </div>

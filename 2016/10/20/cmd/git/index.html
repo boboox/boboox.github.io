@@ -9,21 +9,24 @@
   <title>Git 常用命令 | 波波张的个人工作日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1git clone [库地址]
-git remote add [库别名] [库地址]git remote rm [库别名]git push [库别名] [分支]git statusgit cache -rm
-#分支管理git branch 查看所有分支git branch dev 创建分支git checkout -b develop master 创建+切换分支git checkout mas">
+git 命令行操作git add -i(interactive) 交互式暂存
+git remote add [库别名] [库地址]git remote rm [库别名]git remote -v 查看git push [库别名] [分支]git push [库别名] [分支] –tagsgit statusgit cache -rm
+git pull ==&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 常用命令">
 <meta property="og:url" content="http://boboox.github.com/2016/10/20/cmd/git/index.html">
 <meta property="og:site_name" content="波波张的个人工作日记">
 <meta property="og:description" content="1git clone [库地址]
-git remote add [库别名] [库地址]git remote rm [库别名]git push [库别名] [分支]git statusgit cache -rm
-#分支管理git branch 查看所有分支git branch dev 创建分支git checkout -b develop master 创建+切换分支git checkout mas">
-<meta property="og:updated_time" content="2016-11-03T01:20:38.000Z">
+git 命令行操作git add -i(interactive) 交互式暂存
+git remote add [库别名] [库地址]git remote rm [库别名]git remote -v 查看git push [库别名] [分支]git push [库别名] [分支] –tagsgit statusgit cache -rm
+git pull ==&amp;gt;">
+<meta property="og:updated_time" content="2017-03-31T06:06:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 常用命令">
 <meta name="twitter:description" content="1git clone [库地址]
-git remote add [库别名] [库地址]git remote rm [库别名]git push [库别名] [分支]git statusgit cache -rm
-#分支管理git branch 查看所有分支git branch dev 创建分支git checkout -b develop master 创建+切换分支git checkout mas">
+git 命令行操作git add -i(interactive) 交互式暂存
+git remote add [库别名] [库地址]git remote rm [库别名]git remote -v 查看git push [库别名] [分支]git push [库别名] [分支] –tagsgit statusgit cache -rm
+git pull ==&amp;gt;">
   
     <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
   
@@ -159,11 +162,20 @@ git remote add [库别名] [库地址]git remote rm [库别名]git push [库别�
     <div class="article-entry" itemprop="articleBody">
       
         <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> [库地址]</div></pre></td></tr></table></figure>
-<p>git remote add [库别名] [库地址]<br>git remote rm [库别名]<br>git push [库别名] [分支]<br>git status<br>git cache -rm</p>
-<p>#分支管理<br>git branch 查看所有分支<br>git branch dev 创建分支<br>git checkout -b develop master 创建+切换分支<br>git checkout master 切换到Master分支<br>git checkout -filename.txt 丢弃工作区修改( - 很重要)<br>git banch -d bug 删除分支<br>git merge –no-ff develop  将develop分支合并到当前分支git</p>
+<p>git 命令行操作<br>git add -i(interactive) 交互式暂存</p>
+<p>git remote add [库别名] [库地址]<br>git remote rm [库别名]<br>git remote -v 查看<br>git push [库别名] [分支]<br>git push [库别名] [分支] –tags<br>git status<br>git cache -rm</p>
+<p>git pull ==&gt;<br>git fetch + git merge<br>如果需要以rebase的方式,需要使用<br>git pull –rebase</p>
+<p>#分支管理<br>git branch 查看所有本地分支<br>git branch -a 查看所有分支<br>git branch -r 查看远程分支<br>git branch dev 创建分支<br>git checkout -b develop master 创建+切换分支<br>git checkout master 切换到Master分支<br>git checkout -filename.txt 丢弃工作区修改( - 很重要)<br>git banch -d bug 删除分支<br>git merge –no-ff develop  将develop分支合并到当前分支git</p>
 <p>#工作区<br>git stash 挂起工作区.<br>git stash list 查看挂起的工作区<br>git stash pop 回复工作区内容并删除记录</p>
-<p>#版本回退<br>git reset -hard HEAD^ 上一个版本<br>git reset -hard HEAD^^ 上两个版本<br>git reset -hard HEAD~100 上100个版本<br>git reset -hard [版本号] 指定版本号</p>
-<p>#bug修复的流程<br>git checkout -b [分支名<em>] //在需要开分支的分支上<br>…修改,提交git<br>切换回主分支<br>git merge –no-ff [分支名</em>]</p>
+<p>#版本回退<br>git reset –hard HEAD^ 上一个版本<br>git reset –hard HEAD^^ 上两个版本<br>git reset –hard HEAD~100 上100个版本<br>git reset –hard [版本号] 指定版本号<br>reset之后 在指定版本后的commit会无法再log中显示,但是依然可以追踪<br>推荐使用revert 回退到指定版本的文件状态,可能会遇到冲突,完成冲突之后产生一个新的提交<br>git revert [commit*]<br>在发生冲突之后记得使用 –continue 继续或者使用 –quit/abort 取消回退<br>!!!<br>revert 是回退到这个版本提交之前的内容<br>reset 是回退到这个版本提交之后的样子</p>
+<p>#bug修复的流程<br>git checkout -b [分支名<em>] //在需要开分支的分支上<br>…修改,提交git<br>切换回主分支<br>git merge –no-ff [分支名</em>]<br>必须带上–no-ff 为了版本演进清晰</p>
+<p>#分支冲突解决流程</p>
+<p>#git rebase<br>git checkout [分支名<em>(在开发的,最新的)]<br>git rebase [分支名</em>]</p>
+<p>git rebase –continue 发生冲突之后,解决完继续<br>git rebase –abort 停止rebase</p>
+<p>#git tag</p>
+<p>git tag -a [tag 名称] [commit Hash] 新建tag并且需要备注<br>如果加上 -m ‘xxxx’ 可以直接完成备注<br>git tag -d [tag 名称] 删除tag 删除本地的</p>
+<p>git push –tags 推送tags 到远端<br>git push origin –delete tag [tag 名称] 删除远端tag</p>
+<p>#查看已经commit未push的commit<br>git cherry -v<br>git log [分支名] ^origin/[分支名]</p>
 
       
     </div>

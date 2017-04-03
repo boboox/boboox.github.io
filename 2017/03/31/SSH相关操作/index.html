@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://boboox.github.com">
-  <title>Category: 健身 | 波波张的个人工作日记</title>
+  <title>SSH相关操作 | 波波张的个人工作日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="波波张的个人工作日记">
-<meta property="og:url" content="http://boboox.github.com/categories/健身/index.html">
+  <meta name="description" content="生成1ssh-keygen -t rsa -C &quot;zhangjunbin@wanda.cn&quot;
+使用12ssh-add &amp;lt;file-path:这里是公钥&amp;gt;//将公钥添加到会话中去
+问题ssh-add只是将密钥添加到会话中.仅本次会话有效,重启失效所以经常会遇到permission denied (publick key)的问题原因是因为重启之后会话中已经添加的密钥被清空需要重新执行ssh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH相关操作">
+<meta property="og:url" content="http://boboox.github.com/2017/03/31/SSH相关操作/index.html">
 <meta property="og:site_name" content="波波张的个人工作日记">
+<meta property="og:description" content="生成1ssh-keygen -t rsa -C &quot;zhangjunbin@wanda.cn&quot;
+使用12ssh-add &amp;lt;file-path:这里是公钥&amp;gt;//将公钥添加到会话中去
+问题ssh-add只是将密钥添加到会话中.仅本次会话有效,重启失效所以经常会遇到permission denied (publick key)的问题原因是因为重启之后会话中已经添加的密钥被清空需要重新执行ssh">
+<meta property="og:updated_time" content="2017-03-31T07:38:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="波波张的个人工作日记">
+<meta name="twitter:title" content="SSH相关操作">
+<meta name="twitter:description" content="生成1ssh-keygen -t rsa -C &quot;zhangjunbin@wanda.cn&quot;
+使用12ssh-add &amp;lt;file-path:这里是公钥&amp;gt;//将公钥添加到会话中去
+问题ssh-add只是将密钥添加到会话中.仅本次会话有效,重启失效所以经常会遇到permission denied (publick key)的问题原因是因为重启之后会话中已经添加的密钥被清空需要重新执行ssh">
   
     <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
   
@@ -130,59 +140,95 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-SSH相关操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/06/fitness/DOMS/" class="archive-article-date">
-  	<time datetime="2016-11-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/06/fitness/DOMS/">你不知道的DOMS</a>
+    <h1 class="article-title" itemprop="name">
+      SSH相关操作
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"zhangjunbin@wanda.cn"</span></div></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-add &lt;file-path:这里是公钥&gt;</div><div class="line">//将公钥添加到会话中去</div></pre></td></tr></table></figure>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p><code>ssh-add</code>只是将密钥添加到会话中.仅本次会话有效,<strong>重启失效</strong><br>所以经常会遇到permission denied (publick key)的问题<br>原因是因为重启之后会话中已经添加的密钥被清空<br>需要重新执行<code>ssh-add</code></p>
+<p>为了方便还有一种方法可以一劳永逸<br><strong>添加.ssh/config文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host github.wanda-group.net</div><div class="line">  User zhangjunbin</div><div class="line">  Hostname github.wanda-group.net</div><div class="line">  IdentityFile ~/.ssh/wanda_git_0203_rsa</div></pre></td></tr></table></figure>
+<p>添加完了之后 访问指定域名时将会优先使用指定的密钥</p>
+<h4 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h4><p>ssh -T git@github.wanda-group.net<br>成功会提示用户名</p>
+<h3 id="git中使用"><a href="#git中使用" class="headerlink" title="git中使用"></a>git中使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-add ~/.ssh/xxxxxxxx</div><div class="line">pbcopy &lt; ~/.ssh/xxxxxxxx.pub</div></pre></td></tr></table></figure>
+<p>复制到git setting sshkeys </p>
+<h4 id="对比git上的finger-print"><a href="#对比git上的finger-print" class="headerlink" title="对比git上的finger print"></a>对比git上的finger print</h4><p>最新的SSH 命令将finger print 以SHA256的形式列出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -l -v  -f  ~/.ssh/xxx</div><div class="line">4096 SHA256:CF+LL0hN5SVbrMyGg5yjjWFkwumGU9qSCv3MlKdGdbo zhangjunbin@wanda.cn (RSA)</div></pre></td></tr></table></figure>
+<p>如果需要比较git上 md5 的finger print可以使用以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub</div><div class="line">2048 MD5:b7:92:03:03:9d:b5:43:c5:dc:98:14:4e:3b:65:3a:d8 zhangjunbin@wanda.cn (RSA)</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/03/31/SSH相关操作/" class="archive-article-date">
+  	<time datetime="2017-03-31T06:48:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-31</time>
+</a>
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/理论/">理论</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/健身/">健身</a>
-	</div>
+      
 
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/31/vi的基本操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vi的基本操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
 
 
       </div>
@@ -205,10 +251,10 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: true,
 		root: "/",
 		innerArchive: true

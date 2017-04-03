@@ -132,6 +132,67 @@
       <div class="body-wrap">
         
   
+    <article id="post-SSH相关操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/31/SSH相关操作/">SSH相关操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"zhangjunbin@wanda.cn"</span></div></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-add &lt;file-path:这里是公钥&gt;</div><div class="line">//将公钥添加到会话中去</div></pre></td></tr></table></figure>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p><code>ssh-add</code>只是将密钥添加到会话中.仅本次会话有效,<strong>重启失效</strong><br>所以经常会遇到permission denied (publick key)的问题<br>原因是因为重启之后会话中已经添加的密钥被清空<br>需要重新执行<code>ssh-add</code></p>
+<p>为了方便还有一种方法可以一劳永逸<br><strong>添加.ssh/config文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host github.wanda-group.net</div><div class="line">  User zhangjunbin</div><div class="line">  Hostname github.wanda-group.net</div><div class="line">  IdentityFile ~/.ssh/wanda_git_0203_rsa</div></pre></td></tr></table></figure>
+<p>添加完了之后 访问指定域名时将会优先使用指定的密钥</p>
+<h4 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h4><p>ssh -T git@github.wanda-group.net<br>成功会提示用户名</p>
+<h3 id="git中使用"><a href="#git中使用" class="headerlink" title="git中使用"></a>git中使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-add ~/.ssh/xxxxxxxx</div><div class="line">pbcopy &lt; ~/.ssh/xxxxxxxx.pub</div></pre></td></tr></table></figure>
+<p>复制到git setting sshkeys </p>
+<h4 id="对比git上的finger-print"><a href="#对比git上的finger-print" class="headerlink" title="对比git上的finger print"></a>对比git上的finger print</h4><p>最新的SSH 命令将finger print 以SHA256的形式列出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -l -v  -f  ~/.ssh/xxx</div><div class="line">4096 SHA256:CF+LL0hN5SVbrMyGg5yjjWFkwumGU9qSCv3MlKdGdbo zhangjunbin@wanda.cn (RSA)</div></pre></td></tr></table></figure>
+<p>如果需要比较git上 md5 的finger print可以使用以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub</div><div class="line">2048 MD5:b7:92:03:03:9d:b5:43:c5:dc:98:14:4e:3b:65:3a:d8 zhangjunbin@wanda.cn (RSA)</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/03/31/SSH相关操作/" class="archive-article-date">
+  	<time datetime="2017-03-31T06:48:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-31</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-vi的基本操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -150,7 +211,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="vi的三种模式"><a href="#vi的三种模式" class="headerlink" title="vi的三种模式"></a>vi的三种模式</h3><ul>
+<li>命令模式 command mode (光标控制,字符`行的移动删除等)</li>
+<li>插入模式 Insert mode (用于文字编辑)</li>
+<li>底行模式 last line mode (保存,退出,或者查找等)</li>
+</ul>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><p>在<strong>命令模式</strong>下,按<strong>I</strong> <strong>进入插入模式</strong><br>在<strong>命令模式</strong>下,按<strong>:</strong> <strong>进入底行模式</strong></p>
+<h3 id="命令模式下的基本操作"><a href="#命令模式下的基本操作" class="headerlink" title="命令模式下的基本操作"></a>命令模式下的基本操作</h3><h4 id="进入插入模式"><a href="#进入插入模式" class="headerlink" title="进入插入模式"></a>进入插入模式</h4><p><strong>i</strong>,从光标当前位置开始输入<br><strong>a</strong>,从光标当前位置的下一个位置开始输入<br><strong>o</strong>,从新的一行开始输入</p>
+<h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><p>可以使用上下左右控制光标移动,同样可以使用<strong>h j k l</strong>分别控制上,下,左,右</p>
+<p><strong>ctrl + b</strong>,屏幕往后移动一页<br><strong>ctrl + f</strong>,屏幕往前移动一页<br><strong>ctrl + u</strong>,屏幕往后移动半页<br><strong>ctrl + d</strong>,屏幕往前移动半页<br><strong>0</strong>,移动到文章开头<br><strong>G</strong>,移动到文章结尾<br><strong>$</strong>,移动到行首<br><strong>^</strong>,移动到行尾</p>
+<p><strong>w</strong>,移动到下个字的开头<br><strong>e</strong>,移动到下个字的结尾<br><strong>b</strong>,移动到上个字的开头<br><strong>#l</strong>,#为数字,移动到该行的第#个位置,如5l ,18l</p>
+
       
     </div>
     <div class="article-info article-info-index">
@@ -686,7 +757,7 @@ tab
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
+    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
     			</div>
     	</section>
     

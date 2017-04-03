@@ -8,13 +8,34 @@
   <link rel="dns-prefetch" href="http://boboox.github.com">
   <title>vi的基本操作 | 波波张的个人工作日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="vi的三种模式
+命令模式 command mode (光标控制,字符`行的移动删除等)
+插入模式 Insert mode (用于文字编辑)
+底行模式 last line mode (保存,退出,或者查找等)
+
+基本操作在命令模式下,按I 进入插入模式在命令模式下,按: 进入底行模式
+命令模式下的基本操作进入插入模式i,从光标当前位置开始输入a,从光标当前位置的下一个位置开始输入o,从新的一行开始输">
+<meta property="og:type" content="article">
 <meta property="og:title" content="vi的基本操作">
 <meta property="og:url" content="http://boboox.github.com/2017/03/31/vi的基本操作/index.html">
 <meta property="og:site_name" content="波波张的个人工作日记">
-<meta property="og:updated_time" content="2017-03-31T06:42:22.000Z">
+<meta property="og:description" content="vi的三种模式
+命令模式 command mode (光标控制,字符`行的移动删除等)
+插入模式 Insert mode (用于文字编辑)
+底行模式 last line mode (保存,退出,或者查找等)
+
+基本操作在命令模式下,按I 进入插入模式在命令模式下,按: 进入底行模式
+命令模式下的基本操作进入插入模式i,从光标当前位置开始输入a,从光标当前位置的下一个位置开始输入o,从新的一行开始输">
+<meta property="og:updated_time" content="2017-03-31T08:30:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vi的基本操作">
+<meta name="twitter:description" content="vi的三种模式
+命令模式 command mode (光标控制,字符`行的移动删除等)
+插入模式 Insert mode (用于文字编辑)
+底行模式 last line mode (保存,退出,或者查找等)
+
+基本操作在命令模式下,按I 进入插入模式在命令模式下,按: 进入底行模式
+命令模式下的基本操作进入插入模式i,从光标当前位置开始输入a,从光标当前位置的下一个位置开始输入o,从新的一行开始输">
   
     <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
   
@@ -149,7 +170,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="vi的三种模式"><a href="#vi的三种模式" class="headerlink" title="vi的三种模式"></a>vi的三种模式</h3><ul>
+<li>命令模式 command mode (光标控制,字符`行的移动删除等)</li>
+<li>插入模式 Insert mode (用于文字编辑)</li>
+<li>底行模式 last line mode (保存,退出,或者查找等)</li>
+</ul>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><p>在<strong>命令模式</strong>下,按<strong>I</strong> <strong>进入插入模式</strong><br>在<strong>命令模式</strong>下,按<strong>:</strong> <strong>进入底行模式</strong></p>
+<h3 id="命令模式下的基本操作"><a href="#命令模式下的基本操作" class="headerlink" title="命令模式下的基本操作"></a>命令模式下的基本操作</h3><h4 id="进入插入模式"><a href="#进入插入模式" class="headerlink" title="进入插入模式"></a>进入插入模式</h4><p><strong>i</strong>,从光标当前位置开始输入<br><strong>a</strong>,从光标当前位置的下一个位置开始输入<br><strong>o</strong>,从新的一行开始输入</p>
+<h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><p>可以使用上下左右控制光标移动,同样可以使用<strong>h j k l</strong>分别控制上,下,左,右</p>
+<p><strong>ctrl + b</strong>,屏幕往后移动一页<br><strong>ctrl + f</strong>,屏幕往前移动一页<br><strong>ctrl + u</strong>,屏幕往后移动半页<br><strong>ctrl + d</strong>,屏幕往前移动半页<br><strong>0</strong>,移动到文章开头<br><strong>G</strong>,移动到文章结尾<br><strong>$</strong>,移动到行首<br><strong>^</strong>,移动到行尾</p>
+<p><strong>w</strong>,移动到下个字的开头<br><strong>e</strong>,移动到下个字的结尾<br><strong>b</strong>,移动到上个字的开头<br><strong>#l</strong>,#为数字,移动到该行的第#个位置,如5l ,18l</p>
+
       
     </div>
     <div class="article-info article-info-index">
@@ -172,6 +203,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/03/31/SSH相关操作/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SSH相关操作
+        
+      </div>
+    </a>
   
   
     <a href="/2017/01/11/cmd/svn/" id="article-nav-older" class="article-nav-link-wrap">
@@ -266,7 +306,7 @@
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
+    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
     			</div>
     	</section>
     

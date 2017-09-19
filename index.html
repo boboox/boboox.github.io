@@ -132,6 +132,190 @@
       <div class="body-wrap">
         
   
+    <article id="post-Vue/Vue源码阅读" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/19/Vue/Vue源码阅读/" class="archive-article-date">
+  	<time datetime="2017-09-19T01:44:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Vue/从实例化看Vue的响应式系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/18/Vue/从实例化看Vue的响应式系统/">从实例化看Vue的响应式系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/18/Vue/从实例化看Vue的响应式系统/" class="archive-article-date">
+  	<time datetime="2017-09-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/Js/">Js</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/08/linux/">linux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="gt-ls"><a href="#gt-ls" class="headerlink" title="&gt; ls"></a>&gt; ls</h3><p><code>ls -al</code><br>ls 表示 list,<br>-al 表示列出所有文档,包括隐藏的文档,就是.开头的<br>使用帮助<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">man ls</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--@    1    zhangjunbin  staff  22532     3 28 17:42    .DS_Store</div><div class="line">drwxr-xr-x     6    zhangjunbin  staff    204     9 11 2016     .Genymobile</div><div class="line">[ 1 ]       [ 2 ]   [ 3 ]       [ 4 ]   [ 5 ]       [ 6 ]          [ 7 ]</div><div class="line">[ 属性 ]     [连结]  [拥有者]      [群组]  [档案容量] [ 修改日期 ]     [ 檔名 ]</div></pre></td></tr></table></figure>
+<h4 id="属性解释"><a href="#属性解释" class="headerlink" title="属性解释"></a>属性解释</h4><p><code>drwxr-xr-x</code><br>一共十个字符,分别有他们的含义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1   2  3  4   5  6  7   8  9  0</div><div class="line">d | r  w  x | r  -  x | r  -  x</div></pre></td></tr></table></figure>
+<ul>
+<li>[1    ] 档案类型 </li>
+<li>[2,3,4] 档案拥有者的属性</li>
+<li>[5,6,7] 档案所在组的属性</li>
+<li>[8,9,0] 其他人的属性</li>
+</ul>
+<h5 id="档案类型的值的解释"><a href="#档案类型的值的解释" class="headerlink" title="档案类型的值的解释"></a>档案类型的值的解释</h5><ul>
+<li>[-] 文件</li>
+<li>[d] 文件夹</li>
+<li>[l] link文件</li>
+<li>[b] 则表示为装置文件里面的可供储存的接口设备</li>
+<li>[c] 则表示为装置文件里面的串行端口设备，例如键盘、鼠标。</li>
+</ul>
+<h5 id="属性的值的解释"><a href="#属性的值的解释" class="headerlink" title="属性的值的解释"></a>属性的值的解释</h5><ul>
+<li>[-] 无此属性</li>
+<li>[r] (read contents in directory): 表示具有读取目录结构清单的权限，所以当您具有读取 (r) 一个目录的权限时， 您就可以利用 ls 这个指令将该目录的内容列表显示出来!</li>
+<li>[w] 建立新的档案与目录; 除已经存在的档案与目录(不论该档案是属于谁的!);将已存在的档案或目录进行更名; 移该目录内的档案、目录位置。</li>
+<li>[x] 可执行(用户对当前文件夹没有x[可执行]的权限是,即使有r[可读]权限也无法访问该目录)</li>
+</ul>
+<h5 id="改变属性"><a href="#改变属性" class="headerlink" title="改变属性"></a>改变属性</h5><ul>
+<li>chgrp 改变所属群组</li>
+<li>chown 改变拥有者</li>
+<li>chmod 改变档案的属性,suid</li>
+</ul>
+<p><strong>chgrp</strong>改变所属群组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chgrp [-R] groupName fileName/dirName</div></pre></td></tr></table></figure>
+<p>[-R]属性表示递归,改变该目录下所有的文件与目录,都改成相同的权限</p>
+<blockquote>
+<p><strong>注意</strong> 改变到的那个群组,必须要在 /etc/group 文件中存在</p>
+</blockquote>
+<p><strong>chown</strong>改变拥有者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown [-R] userName fileName/dirName</div></pre></td></tr></table></figure>
+<p>[-R]属性表示递归,改变该目录下所有的文件与目录,都改成相同的权限</p>
+<blockquote>
+<p><strong>注意</strong> 改变到的那个用户,必须要在 /etc/passwd 文件中存在</p>
+</blockquote>
+<p><strong>chmod</strong>改变文档属性</p>
+<h5 id="数字类型改变权限"><a href="#数字类型改变权限" class="headerlink" title="数字类型改变权限"></a>数字类型改变权限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod [-R] xyz fileName/dirName</div></pre></td></tr></table></figure>
+<p>x表示234的权限<br>y表示567的权限<br>z表示890的权限<br>r:4<br>w:2<br>x:1<br>-:0</p>
+<p>计算x的方法为改权限的值的相加<br>例如 rw- = 4+2+0=6<br>    r-x = 4+0+1=5<br>    rwx = 4+2+1=7</p>
+<p>所以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 770 .ssh</div></pre></td></tr></table></figure>
+<p>就是将.ssh权限改为rwxrwx—</p>
+<h5 id="符合类型改变权限"><a href="#符合类型改变权限" class="headerlink" title="符合类型改变权限"></a>符合类型改变权限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod u/g/o/a +/-/= r/w/x fileName/dirName</div></pre></td></tr></table></figure>
+<p>该命令解释为,修改<br>user(u)<br>group(g)<br>other(o)<br>all(a)</p>
+<p>添加(+)<br>除去(-)<br>设定(=)</p>
+<p>权限(r/w/x)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//示例</div><div class="line">chmod u=rw,go=r .bashrc</div><div class="line">chmod u+x,go-r .bashrc</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/04/08/linux/" class="archive-article-date">
+  	<time datetime="2017-04-08T06:16:09.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-04-08</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-SSH相关操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -162,6 +346,12 @@
 <h4 id="对比git上的finger-print"><a href="#对比git上的finger-print" class="headerlink" title="对比git上的finger print"></a>对比git上的finger print</h4><p>最新的SSH 命令将finger print 以SHA256的形式列出</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -l -v  -f  ~/.ssh/xxx</div><div class="line">4096 SHA256:CF+LL0hN5SVbrMyGg5yjjWFkwumGU9qSCv3MlKdGdbo zhangjunbin@wanda.cn (RSA)</div></pre></td></tr></table></figure>
 <p>如果需要比较git上 md5 的finger print可以使用以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub</div><div class="line">2048 MD5:b7:92:03:03:9d:b5:43:c5:dc:98:14:4e:3b:65:3a:d8 zhangjunbin@wanda.cn (RSA)</div></pre></td></tr></table></figure></p>
+<h3 id="ssh的免密登录"><a href="#ssh的免密登录" class="headerlink" title="ssh的免密登录"></a>ssh的免密登录</h3><p>将本地生成的key的公钥复制到目标服务器中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp ~/.ssh/KEY.pub user@[targetServer]:~/.ssh/</div></pre></td></tr></table></figure>
+<p>登录目标服务器,然后将公钥的内容写入到authorized_keys中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.ssh/KEY.pub &gt;&gt; ~/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<p>然后将KEY写入到会话中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-add ~/.ssh/KEY</div></pre></td></tr></table></figure></p>
+<p>就可以实现免密码登录了</p>
 
       
     </div>
@@ -757,7 +947,7 @@ tab
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
+    				<a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
     			</div>
     	</section>
     

@@ -1,184 +1,647 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://boboox.github.com">
-  <title>从实例化看Vue的响应式系统 | 波波张的个人工作日记</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="从实例化看Vue的响应式系统">
-<meta property="og:url" content="http://boboox.github.com/2017/09/18/Vue/从实例化看Vue的响应式系统/index.html">
-<meta property="og:site_name" content="波波张的个人工作日记">
-<meta property="og:updated_time" content="2017-09-19T01:46:00.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从实例化看Vue的响应式系统">
-  
-    <link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/assets/img/favicon.ico">
-  
-  <link rel="stylesheet" href="/main.css">
-  
+	<meta charset="utf-8">
+
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="dns-prefetch" href="http://boboox.github.com">
+	<title>从实例化看Vue的响应式系统 | 波波张的个人工作日记</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="从Vue对象的实例化到Vue的响应式系统
+合并options
+init的时候还在做了几件事
+先从数据代理开始
+响应系统深入浅出
+data的响应式
+computed的响应式
+Vue的init过程(图)
+Vue的响应式系统(图)
+
+
+
+
+
+
+从Vue对象的实例化到Vue的响应式系统
+从[Vue源码阅读()]已经可以知道Vue这个类是如何构造而来,但是Vue核心的响应式系统并未涉及,此文记录Vue源">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="从实例化看Vue的响应式系统">
+	<meta property="og:url" content="http://boboox.github.com/2017/09/18/Vue/从实例化看Vue的响应式系统/index.html">
+	<meta property="og:site_name" content="波波张的个人工作日记">
+	<meta property="og:description" content="从Vue对象的实例化到Vue的响应式系统
+合并options
+init的时候还在做了几件事
+先从数据代理开始
+响应系统深入浅出
+data的响应式
+computed的响应式
+Vue的init过程(图)
+Vue的响应式系统(图)
+
+
+
+
+
+
+从Vue对象的实例化到Vue的响应式系统
+从[Vue源码阅读()]已经可以知道Vue这个类是如何构造而来,但是Vue核心的响应式系统并未涉及,此文记录Vue源">
+	<meta property="og:image" content="http://boboox.github.com/img/Vue/init.png">
+	<meta property="og:image" content="http://boboox.github.com/img/Vue/reactive.png">
+	<meta property="og:updated_time" content="2017-09-19T08:06:00.000Z">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="从实例化看Vue的响应式系统">
+	<meta name="twitter:description" content="从Vue对象的实例化到Vue的响应式系统
+合并options
+init的时候还在做了几件事
+先从数据代理开始
+响应系统深入浅出
+data的响应式
+computed的响应式
+Vue的init过程(图)
+Vue的响应式系统(图)
+
+
+
+
+
+
+从Vue对象的实例化到Vue的响应式系统
+从[Vue源码阅读()]已经可以知道Vue这个类是如何构造而来,但是Vue核心的响应式系统并未涉及,此文记录Vue源">
+	<meta name="twitter:image" content="http://boboox.github.com/img/Vue/init.png">
+
+	<link rel="alternative" href="/atom.xml" title="波波张的个人工作日记" type="application/atom+xml">
+
+
+	<link rel="icon" href="/assets/img/favicon.ico">
+
+	<link rel="stylesheet" href="/main.css">
+
 
 </head>
 
 <body>
-  <div id="container">
-    <div class="left-col">
-      <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
+	<div id="container">
+		<div class="left-col">
+			<div class="overlay"></div>
+			<div class="intrude-less">
+				<header id="header" class="inner">
+					<a href="/" class="profilepic">
 			
 			<img src="/img/bobozhang.jpg" class="js-avatar">
 			
 		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">波波张</a></h1>
-		</hgroup>
+					<hgroup>
+						<h1 class="header-author"><a href="/">波波张</a></h1>
+					</hgroup>
 
-		
 
-		<nav class="header-menu">
-			<ul>
-			
-				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/photos">相册</a></li>
-	        
-			</ul>
-		</nav>
-		<nav class="header-smart-menu">
-	        
-    		
-    			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
-    			
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
-    			
-    			
-            
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
-    			
-    			
-            
-		</nav>
-		<nav class="header-nav">
-			<div class="social">
-				
-					<a class="github" target="_blank" href="http://boboox.github.com" title="github">github</a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss">rss</a>
-		        
+
+					<nav class="header-menu">
+						<ul>
+
+							<li><a href="/">主页</a></li>
+
+							<li><a href="/photos">相册</a></li>
+
+						</ul>
+					</nav>
+					<nav class="header-smart-menu">
+
+
+
+						<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+
+
+
+
+						<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+
+
+
+
+
+
+						<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+
+
+
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+
+							<a class="github" target="_blank" href="http://boboox.github.com" title="github">github</a>
+
+							<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+
+							<a class="rss" target="_blank" href="#" title="rss">rss</a>
+
+						</div>
+					</nav>
+				</header>
 			</div>
-		</nav>
-	</header>		
-</div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"><i class="icon-list"></i></div>
-  		<h1 class="header-author js-mobile-header hide">波波张</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				
-					<img src="/img/bobozhang.jpg" class="js-avatar">
-				
-			</div>
-			<hgroup>
-			  <h1 class="header-author">波波张</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/photos">相册</a></li>
-		        
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="http://boboox.github.com" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss">rss</a>
-			        
+		</div>
+		<div class="mid-col">
+			<nav id="mobile-nav">
+				<div class="overlay">
+					<div class="slider-trigger"><i class="icon-list"></i></div>
+					<h1 class="header-author js-mobile-header hide">波波张</h1>
+				</div>
+				<div class="intrude-less">
+					<header id="header" class="inner">
+						<div class="profilepic">
+
+							<img src="/img/bobozhang.jpg" class="js-avatar">
+
+						</div>
+						<hgroup>
+							<h1 class="header-author">波波张</h1>
+						</hgroup>
+
+						<nav class="header-menu">
+							<ul>
+
+								<li><a href="/">主页</a></li>
+
+								<li><a href="/photos">相册</a></li>
+
+							</ul>
+						</nav>
+						<nav class="header-nav">
+							<div class="social">
+
+								<a class="github" target="_blank" href="http://boboox.github.com" title="github">github</a>
+
+								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+
+							</div>
+						</nav>
+					</header>
 				</div>
 			</nav>
-		</header>				
-	</div>
-</nav>
 
-      <div class="body-wrap">
-        <article id="post-Vue/从实例化看Vue的响应式系统" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      从实例化看Vue的响应式系统
-    </h1>
-  
+			<div class="body-wrap">
+				<article id="post-Vue/从实例化看Vue的响应式系统" class="article article-type-post" itemscope itemprop="blogPost">
+					<div class="article-inner">
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/09/18/Vue/从实例化看Vue的响应式系统/" class="archive-article-date">
-  	<time datetime="2017-09-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-18</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<i class="icon-price-tags"></i>
-	<a class="article-category-link" href="/categories/Js/">Js</a>
-	</div>
+						<input type="hidden" class="isFancy" />
 
 
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+						<header class="article-header">
 
-  
-<nav id="article-nav">
-  
-    <a href="/2017/09/19/Vue/Vue源码阅读/" id="article-nav-newer" class="article-nav-link-wrap">
+
+							<h1 class="article-title" itemprop="name">
+								从实例化看Vue的响应式系统
+							</h1>
+
+
+						</header>
+
+						<div class="article-entry" itemprop="articleBody">
+
+							<!-- TOC -->
+							<ul>
+								<li><a href="#从vue对象的实例化到vue的响应式系统">从Vue对象的实例化到Vue的响应式系统</a>
+									<ul>
+										<li><a href="#合并options">合并options</a></li>
+										<li><a href="#init的时候还在做了几件事">init的时候还在做了几件事</a></li>
+										<li><a href="#先从数据代理开始">先从数据代理开始</a></li>
+										<li><a href="#响应系统深入浅出">响应系统深入浅出</a>
+											<ul>
+												<li><a href="#data的响应式">data的响应式</a></li>
+												<li><a href="#computed的响应式">computed的响应式</a></li>
+												<li><a href="#vue的init过程图">Vue的init过程(图)</a></li>
+												<li><a href="#vue的响应式系统图">Vue的响应式系统(图)</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<!-- /TOC -->
+							<h3 id="从Vue对象的实例化到Vue的响应式系统"><a href="#从Vue对象的实例化到Vue的响应式系统" class="headerlink" title="从Vue对象的实例化到Vue的响应式系统"></a>从Vue对象的实例化到Vue的响应式系统</h3>
+							<ul>
+								<li>从[Vue源码阅读()]已经可以知道Vue这个类是如何构造而来,但是Vue核心的响应式系统并未涉及,此文记录Vue源码阅读中对Vue响应式系统的理解</li>
+							</ul>
+							<figure class="highlight javascript">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line">Vue(&#123;</div><div class="line">   data()&#123;</div><div class="line">      <span class="attr">a</span>:<span class="number">1</span>,</div><div class="line">      <span class="attr">b</span>:<span class="number">2</span></div><div class="line">   &#125;,</div><div class="line">   <span class="attr">computed</span>:&#123;</div><div class="line">      c()&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">this</span>.a+<span class="keyword">this</span>.b;</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;)</div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<p>初始化一个简单的Vue对象包含两个data属性和一个计算属性<br>Vue的构造函数<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span>(<span class="params">options</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</div><div class="line">    !(<span class="keyword">this</span> <span class="keyword">instanceof</span> Vue)</div><div class="line">  ) &#123;</div><div class="line">    warn(<span class="string">'Vue is a constructor and should be called with the `new` keyword'</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>._init(options)</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<ul>
+								<li>_init方法在init.js的initMixin方法中绑定到Vue的prototype上</li>
+							</ul>
+							<h4 id="合并options"><a href="#合并options" class="headerlink" title="合并options"></a>合并options</h4>
+							<p>在_init方法中核心的几个步骤涉及如下<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="keyword">if</span> (options &amp;&amp; options._isComponent) &#123;</div><div class="line">  <span class="comment">// optimize internal component instantiation</span></div><div class="line">  <span class="comment">// since dynamic options merging is pretty slow, and none of the</span></div><div class="line">  <span class="comment">// internal component options needs special treatment.</span></div><div class="line">  initInternalComponent(vm, options)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  vm.$options = mergeOptions(</div><div class="line">    resolveConstructorOptions(vm.constructor),</div><div class="line">    options || &#123;&#125;,</div><div class="line">    vm</div><div class="line">  )</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>由于我们实例化的并不是一个组件,所以走的是<code>mergeOptions</code>方法<br>通过策略合并options,策略主要包括了</p>
+							<ul>
+								<li>el,propsData,使用defaultStrat</li>
+								<li>data (稍复杂,不展开)</li>
+								<li>watch,watcher不合并所以处理成对象包含数组{[],[]},parentVal在前</li>
+								<li>methods,props,inject,computed 直接合并子覆盖父</li>
+								<li>provide mergeDataOrFn</li>
+							</ul>
+							<p>通过遍历了<code>ASSET_TYPES</code><br>添加了component, directive, filter的策略<code>mergeAssets</code></p>
+							<p>通过遍历了<code>LIFECYCLE_HOOKS</code><br>添加了所有生命周期相关函数的钩子的策略<code>mergeHook</code></p>
+							<h4 id="init的时候还在做了几件事"><a href="#init的时候还在做了几件事" class="headerlink" title="init的时候还在做了几件事"></a>init的时候还在做了几件事</h4>
+							<p>init过程中为vm实例添加了下</p>
+							<figure class="highlight javascript">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div><div class="line">2</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line">vm._renderProxy = vm</div><div class="line">vm._self = vm</div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<p>并且经过多个方法处理,如下:</p>
+							<p>添加生命周期相关属性<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">initLifecycle(vm)</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>为实例添加了_parentListeners的事件监听<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">initEvents(vm)</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>主要挂载createElement方法<br>_vnode,_staticTrees,$slots,$scopedSlots,_c,$createElement<br>绑定了_c,createElement方法到实例上,定义了$attrs,$listeners等属性<br>
+								<figure
+								  class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">initRender(vm)</div></pre>
+											</td>
+										</tr>
+									</table>
+									</figure>
+							</p>
+							<p><strong>在render之后调用了生命周期钩子<code>beforeCreate</code></strong><br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">callHook(vm, <span class="string">'beforeCreate'</span>)</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<figure class="highlight javascript">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line">initInjections(vm) <span class="comment">// resolve injections before data/props</span></div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<figure class="highlight javascript">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line"><span class="comment">//对props建立reactive property</span></div><div class="line"><span class="comment">//将options绑定到vm实例上 包括 Props Methods Data Computed Watch</span></div><div class="line"><span class="comment">//proxy 代理options上的属性到实例上,并对属性的get,set做了一次劫持</span></div><div class="line">initState(vm)</div><div class="line">initProvide(vm) <span class="comment">// resolve provide after data/props</span></div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<p><strong>最后调用了生命周期钩子<code>created</code></strong><br><strong>因为在created之前并没没有挂载Dom($mount),所有此时$el属性并不可见<a href="https://vuejs.org/v2/api/#created" title="Vue生命周期-created" target="_blank" rel="external">Vue生命周期#Created</a></strong><br>
+								<figure
+								  class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">callHook(vm, <span class="string">'created'</span>)</div></pre>
+											</td>
+										</tr>
+									</table>
+									</figure>
+							</p>
+							<p>最后<br>在runtime/index.js中挂载了$mount<br>query来解析模板 from ‘web/util/index’<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="comment">// mountComponent  from 'core/instance/lifecycle'</span></div><div class="line"><span class="keyword">if</span> (vm.$options.el) &#123;</div><div class="line">vm.$mount(vm.$options.el)</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>这里说明了<strong>为什么如果不传el的话 就需要手动去执行$mount来挂载元素了<a href="https://vuejs.org/v2/api/#vm-mount" title="Vue生命周期-vm.$mount" target="_blank" rel="external">Vue生命周期#vm.$mount</a></strong></p>
+							<h4 id="先从数据代理开始"><a href="#先从数据代理开始" class="headerlink" title="先从数据代理开始"></a>先从数据代理开始</h4>
+							<p>上面介绍了在init整个过程中执行的几个主要方法,而建立响应式系统的关键就是<code>initState</code>方法<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="comment">// Vue-source/src/core/instance/state.js</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initState</span>(<span class="params">vm: Component</span>) </span>&#123;</div><div class="line">  vm._watchers = []</div><div class="line">  <span class="keyword">const</span> opts = vm.$options</div><div class="line">  <span class="keyword">if</span> (opts.props) initProps(vm, opts.props)</div><div class="line">  <span class="keyword">if</span> (opts.methods) initMethods(vm, opts.methods)</div><div class="line">  <span class="keyword">if</span> (opts.data) &#123;</div><div class="line">    initData(vm)</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    observe(vm._data = &#123;&#125;, <span class="literal">true</span> <span class="comment">/* asRootData */</span> )</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (opts.computed) initComputed(vm, opts.computed)</div><div class="line">  <span class="keyword">if</span> (opts.watch &amp;&amp; opts.watch !== nativeWatch) &#123;</div><div class="line">    initWatch(vm, opts.watch)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>由于我们只传入了data和computed<br>所以只会执行两个方法<code>initData</code>与<code>initComputed</code>.</p>
+							<p>为了减少篇幅只贴关键代码<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="comment">// Vue-source/src/core/instance/state.js</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">initData</span>(<span class="params">vm: Component</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> data = vm.$options.data</div><div class="line">  <span class="comment">// 当data类型是function的时候,应该是一个getter函数,所以需要data.call(vm)???</span></div><div class="line">  data = vm._data = <span class="keyword">typeof</span> data === <span class="string">'function'</span> ?</div><div class="line">    getData(data, vm) :</div><div class="line">    data || &#123;&#125;</div><div class="line">  ...</div><div class="line">  <span class="comment">// proxy data on instance</span></div><div class="line">  proxy(vm, <span class="string">`_data`</span>, key)</div><div class="line">  ...</div><div class="line">  <span class="comment">// observe data</span></div><div class="line">  observe(data, <span class="literal">true</span> <span class="comment">/* asRootData */</span> )</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>第一个关键代码<br>
+								<figure class="highlight plain">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">data = vm._data = typeof data === &apos;function&apos; ? getData(data, vm) : data || &#123;&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>如果data是一个函数的时候,调用<code>getData</code>方法,从实例上面计算data的值,<br>否则直接发返回data<br>看到这里就明白了官网的<a href="https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function"
+								  title="Data must be a Function" target="_blank" rel="external">Data must be a Function</a>,<br>如果data不是function则Vue做为一个组件的时候,同一个组件的多个实例将共享同一个data<br><strong>注意:这里同时将data赋值给了vm._data</strong></p>
+							<p>第二个关键代码<br>
+								<figure class="highlight plain">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line">proxy(vm, `_data`, key)</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p><code>proxy</code>方法的作用是在实例this/vm上面做了一次data的数据代理,只有如此我们才可以通过this.a 来访问data.a<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">proxy</span>(<span class="params">target: Object, sourceKey: string, key: string</span>) </span>&#123;</div><div class="line">  sharedPropertyDefinition.get = <span class="function"><span class="keyword">function</span> <span class="title">proxyGetter</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// this === vm</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>[sourceKey][key]</div><div class="line">  &#125;</div><div class="line">  sharedPropertyDefinition.set = <span class="function"><span class="keyword">function</span> <span class="title">proxySetter</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>[sourceKey][key] = val</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">Object</span>.defineProperty(target, key, sharedPropertyDefinition)</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>结果就是通过<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
+								  target="_blank" rel="external">ES5 Object.defineProperty</a>方法在vm上的定义了两个a,b属性,而其getter/setter方法为<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="keyword">const</span> sharedPropertyDefinition = &#123;</div><div class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> <span class="title">proxyGetter</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// this === vm</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>[_data][a/b]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> <span class="title">proxySetter</span>(<span class="params">val</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>[_data][a/b] = val</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>所以当我们在实例的代码中访问this.a的时候,实际放访问路径是<br>this.a==&gt;vm.a==&gt;<strong>vm._data.a</strong>==&gt;$option.data.a<br>至此,就完成了Vue的数据代理</p>
+							<h4 id="响应系统深入浅出"><a href="#响应系统深入浅出" class="headerlink" title="响应系统深入浅出"></a>响应系统深入浅出</h4>
+							<h5 id="data的响应式"><a href="#data的响应式" class="headerlink" title="data的响应式"></a>data的响应式</h5>
+							<figure class="highlight plain">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line">observe(data, true /* asRootData */ )</div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<p>这是整个响应式的入口<br><code>observe</code>方法只做了一件事情,就是<strong>new Observer(data)</strong><br>建立了一个观察者</p>
+							<figure class="highlight javascript">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</div><div class="line">  value: any;</div><div class="line">  dep: Dep;</div><div class="line">  vmCount: number; <span class="comment">// number of vms that has this object as root $data</span></div><div class="line"></div><div class="line">  <span class="keyword">constructor</span>(value: any) &#123;</div><div class="line">    <span class="keyword">this</span>.value = value</div><div class="line">    <span class="keyword">this</span>.dep = <span class="keyword">new</span> Dep()</div><div class="line">    <span class="keyword">this</span>.vmCount = <span class="number">0</span></div><div class="line">    def(value, <span class="string">'__ob__'</span>, <span class="keyword">this</span>)</div><div class="line">    <span class="keyword">this</span>.walk(value)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Walk through each property and convert them into</div><div class="line">   * getter/setters. This method should only be called when</div><div class="line">   * value type is Object.</div><div class="line">   */</div><div class="line">  walk(obj: <span class="built_in">Object</span>) &#123;</div><div class="line">    <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(obj)</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.length; i++) &#123;</div><div class="line">      defineReactive(obj, keys[i], obj[keys[i]])</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<p>从源码可以看出其实实例化一个Observer最终就是遍历data的所有属性<br>并对其调用<code>defineReactive</code>方法</p>
+							<figure class="highlight javascript">
+								<table>
+									<tr>
+										<td class="gutter">
+											<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre>
+										</td>
+										<td class="code">
+											<pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">obj: Object,key: string,val: any,customSetter ? : ? Function,shallow ? : boolean</span>) </span>&#123;</div><div class="line">  <span class="comment">// 每一个响应式的属性都有持有一个依赖Dep</span></div><div class="line">  <span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</div><div class="line">  <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</div><div class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> <span class="title">reactiveGetter</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	  <span class="comment">// 计算data的值</span></div><div class="line">      <span class="keyword">const</span> value = getter ? getter.call(obj) : </div><div class="line">	  <span class="comment">// 直接访问data的时候Dep.target是空的</span></div><div class="line">	  <span class="comment">// 这里的用处后面讲</span></div><div class="line">      <span class="keyword">if</span> (Dep.target) &#123;</div><div class="line">        dep.depend()</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> value</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> <span class="title">reactiveSetter</span>(<span class="params">newVal</span>) </span>&#123;</div><div class="line">      <span class="keyword">const</span> value = getter ? getter.call(obj) : val</div><div class="line">      <span class="comment">// 如果新旧得值没有方法变化则直接返回</span></div><div class="line">      <span class="keyword">if</span> (newVal === value || (newVal !== newVal &amp;&amp; value !== value)) &#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">      &#125;</div><div class="line">	  <span class="comment">// 调用setter</span></div><div class="line">      setter.call(obj, newVal)</div><div class="line">	  <span class="comment">// 通过dep的notify发出通知,来执行dom的刷新等操作</span></div><div class="line">      dep.notify()</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre>
+										</td>
+									</tr>
+								</table>
+							</figure>
+							<p>到此为止data的a,b两个属性已经完成了响应式系统的建立,通过修改属性就可以出发依赖的通知去做相应的修改<br>但是,对于computed属性<br>整个过程并不一样</p>
+							<h5 id="computed的响应式"><a href="#computed的响应式" class="headerlink" title="computed的响应式"></a>computed的响应式</h5>
+							<p>回到<code>initState</code>函数中,<br>可以看到computed属性会调用<code>initComputed</code>方法<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">initComputed</span>(<span class="params">vm: Component, computed: Object</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> watchers = vm._computedWatchers = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> computed) &#123;</div><div class="line"> 	<span class="keyword">const</span> userDef = computed[key]</div><div class="line">    <span class="keyword">let</span> getter = <span class="keyword">typeof</span> userDef === <span class="string">'function'</span> ? userDef : userDef.get</div><div class="line">    <span class="comment">// create internal watcher for the computed property.</span></div><div class="line">    watchers[key] = <span class="keyword">new</span> Watcher(vm, getter, noop, computedWatcherOptions)</div><div class="line"></div><div class="line">    <span class="comment">// component-defined computed properties are already defined on the</span></div><div class="line">    <span class="comment">// component prototype. We only need to define computed properties defined</span></div><div class="line">    <span class="comment">// at instantiation here.</span></div><div class="line">    <span class="keyword">if</span> (!(key <span class="keyword">in</span> vm)) &#123;</div><div class="line">      defineComputed(vm, key, userDef)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>该方法为每一个computed属性实例化了一个Watcher<br>直接看一下Watcher构造函数的源码<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="keyword">constructor</span>(vm: Component, expOrFn: string | Function, cb: Function, options ? : Object) &#123;</div><div class="line">  <span class="keyword">this</span>.vm = vm</div><div class="line">  vm._watchers.push(<span class="keyword">this</span>)</div><div class="line">  ...</div><div class="line">  this.cb = cb</div><div class="line">  <span class="keyword">this</span>.deps = []</div><div class="line">  <span class="keyword">this</span>.newDeps = []</div><div class="line">  <span class="keyword">this</span>.depIds = <span class="keyword">new</span> <span class="built_in">Set</span>()</div><div class="line">  <span class="keyword">this</span>.newDepIds = <span class="keyword">new</span> <span class="built_in">Set</span>()</div><div class="line">  ...</div><div class="line">  this.getter = parsePath(expOrFn)</div><div class="line">  ...</div><div class="line">  this.value = <span class="keyword">this</span>.lazy ? <span class="literal">undefined</span> : <span class="keyword">this</span>.get()</div><div class="line">&#125;</div><div class="line">get() &#123;</div><div class="line">  <span class="comment">// Dep.target = this</span></div><div class="line">  pushTarget(<span class="keyword">this</span>)</div><div class="line">  <span class="keyword">let</span> value</div><div class="line">  <span class="keyword">const</span> vm = <span class="keyword">this</span>.vm</div><div class="line">  value = <span class="keyword">this</span>.getter.call(vm, vm)</div><div class="line">  <span class="comment">// Dep.target = null ... </span></div><div class="line">  popTarget()</div><div class="line">  <span class="keyword">this</span>.cleanupDeps()</div><div class="line">  <span class="keyword">return</span> value</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>Watcher定义了一些Dep的集合用于收集reactive data的dep<br><strong>注意:在完成初始化的最后,执行了this.get()</strong><br>在get方法中三个关键的步骤</p>
+							<ul>
+								<li>1:pushTarget(this)<br>pushTarget方法将当前Watcher设置为Dep.target(全局唯一)</li>
+								<li>2:this.getter.call<br>在例子中,该方法就是
+									<figure class="highlight plain">
+										<table>
+											<tr>
+												<td class="gutter">
+													<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
+												</td>
+												<td class="code">
+													<pre><div class="line">c()&#123;</div><div class="line"> return this.a+this.b;</div><div class="line">&#125;</div></pre>
+												</td>
+											</tr>
+										</table>
+									</figure>
+								</li>
+							</ul>
+							<p>调用该方法会触发a,b属性的getter方法,<br>这时候我们可以回到<a href="#data的响应式">data的响应式</a>中<br>data的getter方法中那一段函数和其相关联的函数<br>
+								<figure class="highlight javascript">
+									<table>
+										<tr>
+											<td class="gutter">
+												<pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre>
+											</td>
+											<td class="code">
+												<pre><div class="line"><span class="comment">// data.getter</span></div><div class="line"><span class="keyword">if</span>(Dep.target)&#123;</div><div class="line"> dep.depend()</div><div class="line">&#125;</div><div class="line"><span class="comment">//Dep.depend</span></div><div class="line">depend () &#123;</div><div class="line"> <span class="keyword">if</span> (Dep.target) &#123;</div><div class="line">   <span class="comment">// target 就是computed实例化的watcher</span></div><div class="line">   Dep.target.addDep(<span class="keyword">this</span>)</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Dep.addSub</span></div><div class="line">addSub (Watcher) &#123;</div><div class="line"> <span class="keyword">this</span>.subs.push(sub)</div><div class="line">&#125;</div><div class="line"><span class="comment">//Watcher.addDep</span></div><div class="line">addDep(dep) &#123;</div><div class="line">  <span class="keyword">const</span> id = dep.id</div><div class="line">  <span class="comment">//watcher持有了相关的dep</span></div><div class="line">  <span class="keyword">this</span>.newDepIds.add(id)</div><div class="line">  <span class="keyword">this</span>.newDeps.push(dep)</div><div class="line">  <span class="comment">//dep持有了Watcher</span></div><div class="line">  dep.addSub(<span class="keyword">this</span>)</div><div class="line">&#125;</div></pre>
+											</td>
+										</tr>
+									</table>
+								</figure>
+							</p>
+							<p>由此,Watcher与其涉及到的data的Observer通过Dep建立的关联.<br>所以之后当我们修改data的值的时候会触发data.setter中的dep的notify(),<br>而dep已经收集了与其相关联的Watcher,便可以通知watcher去刷刷新它的值.</p>
+							<ul>
+								<li>3:popTarget<br>当计算完成watcher的值与完成依赖解析之后,还原Dep.target<br>因为每一刻只有一个watcher在工作</li>
+							</ul>
+							<h5 id="Vue的init过程-图"><a href="#Vue的init过程-图" class="headerlink" title="Vue的init过程(图)"></a>Vue的init过程(图)</h5>
+							<div align="center"><br> <img src="/img/Vue/init.png" alt="Vue的init过程"><br></div>
+
+							<h5 id="Vue的响应式系统-图"><a href="#Vue的响应式系统-图" class="headerlink" title="Vue的响应式系统(图)"></a>Vue的响应式系统(图)</h5>
+							<div align="center"><br> <img src="/img/Vue/reactive.png" alt="Vue的响应式系统"><br></div>
+
+							<p>至此,整个Vue的实例化过程与响应式系统大概就是这样子了</p>
+
+
+						</div>
+						<div class="article-info article-info-index">
+
+							<a href="/2017/09/18/Vue/从实例化看Vue的响应式系统/" class="archive-article-date">
+								<time datetime="2017-09-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-18</time>
+							</a>
+
+							<div class="article-tag tagcloud">
+								<i class="icon-price-tags"></i>
+								<ul class="article-tag-list">
+									<li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li>
+								</ul>
+							</div>
+
+
+							<div class="article-category tagcloud">
+								<i class="icon-price-tags"></i>
+								<a class="article-category-link" href="/categories/Js/">Js</a>
+							</div>
+
+
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</article>
+
+
+				<nav id="article-nav">
+
+					<a href="/2017/09/19/Vue/Vue源码阅读/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -186,35 +649,35 @@
         
       </div>
     </a>
-  
-  
-    <a href="/2017/04/08/linux/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
+
+
+					<a href="/2017/04/08/linux/" id="article-nav-older" class="article-nav-link-wrap">
+						<div class="article-nav-title">linux</div>
+						<i class="icon-circle-right"></i>
+					</a>
+
+				</nav>
 
 
 
 
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">Share to: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-	    <a class="jiathis_button_twitter"></a>
-	    <a class="jiathis_button_plus"></a> 
-	    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
+				<div class="share_jia">
+					<!-- JiaThis Button BEGIN -->
+					<div class="jiathis_style">
+						<span class="jiathis_txt">Share to: &nbsp; </span>
+						<a class="jiathis_button_facebook"></a>
+						<a class="jiathis_button_twitter"></a>
+						<a class="jiathis_button_plus"></a>
+						<a class="jiathis_button_tsina"></a>
+						<a class="jiathis_button_cqq"></a>
+						<a class="jiathis_button_douban"></a>
+						<a class="jiathis_button_weixin"></a>
+						<a class="jiathis_button_tumblr"></a>
+						<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+					</div>
+					<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+					<!-- JiaThis Button END -->
+				</div>
 
 
 
@@ -224,145 +687,148 @@
 
 
 
-      </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2017 波波张
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
-    </div>
-    <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: false,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: true,
-		root: "/",
-		innerArchive: true
-	}
-</script>
+			</div>
+			<footer id="footer">
+				<div class="outer">
+					<div id="footer-info">
+						<div class="footer-left">
+							&copy; 2017 波波张
+						</div>
+						<div class="footer-right">
+							<a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a>							by Litten
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<script>
+			var yiliaConfig = {
+				fancybox: true,
+				mathjax: false,
+				animate: true,
+				isHome: false,
+				isPost: true,
+				isArchive: false,
+				isTag: false,
+				isCategory: false,
+				open_in_new: true,
+				root: "/",
+				innerArchive: true
+			}
+		</script>
 
-<script src="/./main.js"></script>
+		<script src="/./main.js"></script>
 
 
-    
-<div class="tools-col">
-  <ul class="btn-wrap">
-    
-      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
-    
-    
-      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
-    
-    
-    
-      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
-    
-  </ul>
-  <div class="tools-wrap">
-    
-    	<section class="tools-section tools-section-all chose">
-    	</section>
-    
 
-    
-    	<section class="tools-section tools-section-tag">
-    			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
-    			</div>
-    	</section>
-    
+		<div class="tools-col">
+			<ul class="btn-wrap">
 
-    
+				<li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
 
-    
-    	<section class="tools-section tools-section-me">
-  	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">BoboZhang，&lt;br&gt;毕业于杭电，史称电大的&lt;br&gt;&lt;br&gt;专注减肥20多年,从未放弃，&lt;br/&gt;目前是一枚前端&lt;br/&gt;&lt;br/&gt;智慧,美貌,金钱&lt;br&gt;我,都没有。</div>
-  	  	
-    	</section>
-    
-  </div>
-  
-</div>
-    <!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
-    <!-- Background of PhotoSwipe. 
+				<li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+
+
+
+				<li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+
+			</ul>
+			<div class="tools-wrap">
+
+				<section class="tools-section tools-section-all chose">
+				</section>
+
+
+
+				<section class="tools-section tools-section-tag">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a>						<a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a>
+						<a
+						  href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vi/" style="font-size: 10px;">vi</a> <a href="/tags/理论/" style="font-size: 10px;">理论</a>
+					</div>
+				</section>
+
+
+
+
+
+				<section class="tools-section tools-section-me">
+
+					<div class="aboutme-wrap" id="js-aboutme">BoboZhang，&lt;br&gt;毕业于杭电，史称电大的&lt;br&gt;&lt;br&gt;专注减肥20多年,从未放弃，&lt;br/&gt;目前是一枚前端&lt;br/&gt;&lt;br/&gt;智慧,美貌,金钱&lt;br&gt;我,都没有。</div>
+
+				</section>
+
+			</div>
+
+		</div>
+		<!-- Root element of PhotoSwipe. Must have class pswp. -->
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<!-- Background of PhotoSwipe. 
          It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
+			<div class="pswp__bg"></div>
 
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
+			<!-- Slides wrapper with overflow:hidden. -->
+			<div class="pswp__scroll-wrap">
 
-        <!-- Container that holds slides. 
+				<!-- Container that holds slides. 
             PhotoSwipe keeps only 3 of them in the DOM to save memory.
             Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
+				<div class="pswp__container">
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+				</div>
 
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
+				<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+				<div class="pswp__ui pswp__ui--hidden">
 
-            <div class="pswp__top-bar">
+					<div class="pswp__top-bar">
 
-                <!--  Controls are self-explanatory. Order can be changed. -->
+						<!--  Controls are self-explanatory. Order can be changed. -->
 
-                <div class="pswp__counter"></div>
+						<div class="pswp__counter"></div>
 
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+						<button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
 
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+						<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+						<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
+						<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+						<!-- element will get class pswp__preloader--active when preloader is running -->
+						<div class="pswp__preloader">
+							<div class="pswp__preloader__icn">
+								<div class="pswp__preloader__cut">
+									<div class="pswp__preloader__donut"></div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
+					<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+						<div class="pswp__share-tooltip"></div>
+					</div>
 
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+					<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
             </button>
 
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+					<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
             </button>
 
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
+					<div class="pswp__caption">
+						<div class="pswp__caption__center"></div>
+					</div>
 
-        </div>
+				</div>
 
-    </div>
+			</div>
 
-</div>
-  </div>
+		</div>
+	</div>
 </body>
+
 </html>

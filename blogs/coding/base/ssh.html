@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>真牛英雄 | SSH常用操作</title>
+    <meta name="description" content="看啥看">
+    
+    
+    <link rel="preload" href="/assets/css/22.styles.f2e93f2d.css" as="style"><link rel="preload" href="/assets/js/app.69509e4e.js" as="script"><link rel="preload" href="/assets/js/13.7272f262.js" as="script"><link rel="prefetch" href="/assets/js/10.3d238161.js"><link rel="prefetch" href="/assets/js/0.7610a2d5.js"><link rel="prefetch" href="/assets/js/1.504e35b9.js"><link rel="prefetch" href="/assets/js/2.e9a896ea.js"><link rel="prefetch" href="/assets/js/3.c586e09b.js"><link rel="prefetch" href="/assets/js/4.b0ae4c6f.js"><link rel="prefetch" href="/assets/js/5.6e5aa142.js"><link rel="prefetch" href="/assets/js/6.22e7df9b.js"><link rel="prefetch" href="/assets/js/7.c864a583.js"><link rel="prefetch" href="/assets/js/8.5d0a4964.js"><link rel="prefetch" href="/assets/js/9.ac58fbf6.js"><link rel="prefetch" href="/assets/js/11.d7efc367.js"><link rel="prefetch" href="/assets/js/12.77f298c6.js"><link rel="prefetch" href="/assets/js/14.d4f729ca.js"><link rel="prefetch" href="/assets/js/15.729760ed.js"><link rel="prefetch" href="/assets/js/16.b9b84e54.js"><link rel="prefetch" href="/assets/js/17.dee66672.js"><link rel="prefetch" href="/assets/js/18.73a1c611.js"><link rel="prefetch" href="/assets/js/19.1701d570.js"><link rel="prefetch" href="/assets/js/20.a61d1c12.js"><link rel="prefetch" href="/assets/js/21.40e37fbe.js">
+    <link rel="stylesheet" href="/assets/css/22.styles.f2e93f2d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container ssh-class"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      真牛英雄
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/blogs/coding/" class="nav-link router-link-active">代码</a></div><div class="nav-item"><a href="/blogs/bodybuilding/" class="nav-link">健身</a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/blogs/coding/" class="nav-link router-link-active">代码</a></div><div class="nav-item"><a href="/blogs/bodybuilding/" class="nav-link">健身</a></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading open"><span>基础芝士</span><span class="arrow down"></span></p><ul class="sidebar-group-items"><li><a href="/blogs/coding/base/" class="sidebar-link">基本</a></li><li><a href="/blogs/coding/base/markdown.html" class="sidebar-link">MarkDown 使用指南</a></li><li><a href="/blogs/coding/base/ssh.html" class="active sidebar-link">SSH常用操作</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blogs/coding/base/ssh.html#生成" class="sidebar-link">生成</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/base/ssh.html#使用" class="sidebar-link">使用</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/base/ssh.html#在git中使用" class="sidebar-link">在GIT中使用</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/base/ssh.html#在服务器上使用" class="sidebar-link">在服务器上使用</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/base/ssh.html#测试" class="sidebar-link">测试</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/base/ssh.html#常见问题" class="sidebar-link">常见问题</a></li></ul></li><li><a href="/blogs/coding/base/vim.html" class="sidebar-link">vim编辑中的基本操作</a></li></ul></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>前端学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>JavaScript学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>CSS学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Vue源码学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>docker学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Java学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Spring学习</span><span class="arrow right"></span></p><!----></div></li></ul></div><div class="page"><div class="content"><h1 id="ssh常用操作"><a href="#ssh常用操作" aria-hidden="true" class="header-anchor">#</a> SSH常用操作</h1><p></p><div class="table-of-contents"><ul><li><a href="#生成">生成</a></li><li><a href="#使用">使用</a></li><li><a href="#在git中使用">在GIT中使用</a></li><li><a href="#在服务器上使用">在服务器上使用</a></li><li><a href="#测试">测试</a></li><li><a href="#常见问题">常见问题</a></li></ul></div><p></p><h2 id="生成"><a href="#生成" aria-hidden="true" class="header-anchor">#</a> 生成</h2><pre class="language-bash"><code>ssh-keygen -t rsa -C <span class="token string">&quot;zhangjunbin@wanda.cn&quot;</span>
+</code></pre><h2 id="使用"><a href="#使用" aria-hidden="true" class="header-anchor">#</a> 使用</h2><p>将公钥添加到会话中去</p><pre class="language-bash"><code>ssh-add <span class="token operator">&lt;</span>file-path:这里是公钥<span class="token operator">&gt;</span>
+</code></pre><h2 id="在git中使用"><a href="#在git中使用" aria-hidden="true" class="header-anchor">#</a> 在GIT中使用</h2><pre class="language-bash"><code>ssh-add ~/.ssh/xxxxxxxx
+pbcopy <span class="token operator">&lt;</span> ~/.ssh/xxxxxxxx.pub
+</code></pre><p>复制到git的setting中的sshkeys中添加即可</p><h2 id="在服务器上使用"><a href="#在服务器上使用" aria-hidden="true" class="header-anchor">#</a> 在服务器上使用</h2><ol><li>将本地生成的key的公钥复制到目标服务器中</li></ol><pre class="language-bash"><code><span class="token function">scp</span> ~/.ssh/KEY.pub user@<span class="token punctuation">[</span>targetServer<span class="token punctuation">]</span>:~/.ssh/
+</code></pre><ol start="2"><li>登录目标服务器,然后将公钥的内容写入到authorized_keys中</li></ol><pre class="language-bash"><code><span class="token function">cat</span> ~/.ssh/KEY.pub <span class="token operator">&gt;&gt;</span> ~/.ssh/authorized_keys
+</code></pre><ol start="3"><li>然后将KEY写入到会话中</li></ol><pre class="language-bash"><code>ssh-add ~/.ssh/KEY
+</code></pre><p>就可以实现免密码登录了</p><h2 id="测试"><a href="#测试" aria-hidden="true" class="header-anchor">#</a> 测试</h2><p>ssh -T git@github.xxx.net
+成功会提示用户名</p><h2 id="常见问题"><a href="#常见问题" aria-hidden="true" class="header-anchor">#</a> 常见问题</h2><ol><li><p>失效问题</p><p><code>ssh-add</code>只是将密钥添加到会话中.仅本次<strong>会话有效</strong>,<strong>重启失效</strong>
+所以经常会遇到permission denied (publick key)的问题
+原因是因为重启之后会话中已经添加的密钥被清空
+需要重新执行<code>ssh-add</code></p><p>当然这个有解决办法:
+<strong>添加.ssh/config文件</strong></p><pre class="language-bash"><code>Host github.xxx.net
+User zhangjunbin
+Hostname github.xxx.net
+IdentityFile ~/.ssh/id_rsa
+</code></pre><p>添加完了之后 访问指定域名时将会优先使用指定的密钥</p><div class="tip custom-block"><p class="custom-block-title">TIP</p><p>每次访问最多重试6次ssh-key,如果添加的太多并且靠后,在失败6次之后任没遇到正确的,则依然会失败</p></div></li><li><p>指纹对比</p><p>最新的SSH 命令将finger print 以SHA256的形式列出</p><pre class="language-text"><code>ssh-keygen -l -v  -f  ~/.ssh/xxx
+4096 SHA256:CF+LL0hN5SVbrMyGg5yjjWFkwumGU9qSCv3MlKdGdbo zhangjunbin@wanda.cn (RSA)
+</code></pre><p>而git上的ssh-key的指纹是MD5,所以当遇到自己忘了添加的是哪个key的时候可以通过计算本地的key的MD5来做比较</p><pre class="language-bash"><code>ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub
+2048 MD5:b7:92:03:03:9d:b5:43:c5:dc:98:14:4e:3b:65:3a:d8 zhangjunbin@wanda.cn <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+</code></pre></li></ol></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/blogs/coding/base/markdown.html" class="prev">
+          MarkDown 使用指南
+        </a></span><span class="next"><a href="/blogs/coding/base/vim.html">
+          vim编辑中的基本操作
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/assets/js/13.7272f262.js" defer></script><script src="/assets/js/app.69509e4e.js" defer></script>
+  </body>
+</html>

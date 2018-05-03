@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>真牛英雄 | JS的执行上下文</title>
+    <meta name="description" content="看啥看">
+    
+    
+    <link rel="preload" href="/assets/css/22.styles.f2e93f2d.css" as="style"><link rel="preload" href="/assets/js/app.551103d0.js" as="script"><link rel="preload" href="/assets/js/6.d6f69829.js" as="script"><link rel="prefetch" href="/assets/js/9.faba00b6.js"><link rel="prefetch" href="/assets/js/0.76e72dae.js"><link rel="prefetch" href="/assets/js/1.9d3a480a.js"><link rel="prefetch" href="/assets/js/2.763fb27d.js"><link rel="prefetch" href="/assets/js/3.eab17d48.js"><link rel="prefetch" href="/assets/js/4.a892b6c3.js"><link rel="prefetch" href="/assets/js/5.5f1b6461.js"><link rel="prefetch" href="/assets/js/7.3ae6ea97.js"><link rel="prefetch" href="/assets/js/8.6df84df0.js"><link rel="prefetch" href="/assets/js/10.c7a6565b.js"><link rel="prefetch" href="/assets/js/11.ba874618.js"><link rel="prefetch" href="/assets/js/12.1fc98ab6.js"><link rel="prefetch" href="/assets/js/13.b943c8c2.js"><link rel="prefetch" href="/assets/js/14.8aa873f9.js"><link rel="prefetch" href="/assets/js/15.061ec4bb.js"><link rel="prefetch" href="/assets/js/16.6d12fb5e.js"><link rel="prefetch" href="/assets/js/17.b057cfa7.js"><link rel="prefetch" href="/assets/js/18.6157128a.js"><link rel="prefetch" href="/assets/js/19.86397c6e.js"><link rel="prefetch" href="/assets/js/20.aeaf50ca.js"><link rel="prefetch" href="/assets/js/21.5aa71589.js">
+    <link rel="stylesheet" href="/assets/css/22.styles.f2e93f2d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      真牛英雄
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/blogs/coding/" class="nav-link router-link-active">代码</a></div><div class="nav-item"><a href="/blogs/bodybuilding/" class="nav-link">健身</a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/blogs/coding/" class="nav-link router-link-active">代码</a></div><div class="nav-item"><a href="/blogs/bodybuilding/" class="nav-link">健身</a></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading"><span>基础芝士</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>前端学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading open"><span>JavaScript学习</span><span class="arrow down"></span></p><ul class="sidebar-group-items"><li><a href="/blogs/coding/javascript/eventloop.html" class="sidebar-link">JS的事件循环机制</a></li><li><a href="/blogs/coding/javascript/excute-context.html" class="active sidebar-link">JS的执行上下文</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blogs/coding/javascript/excute-context.html#深入执行上下文-excution-context" class="sidebar-link">深入执行上下文(Excution Context)</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/javascript/excute-context.html#活动对象与变量对象" class="sidebar-link">活动对象与变量对象</a></li><li class="sidebar-sub-header"><a href="/blogs/coding/javascript/excute-context.html#hoisting-关于提升" class="sidebar-link">Hoisting,关于提升</a></li></ul></li></ul></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>CSS学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Vue源码学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>docker学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Java学习</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Spring学习</span><span class="arrow right"></span></p><!----></div></li></ul></div><div class="page"><div class="content"><h1 id="js执行上下文"><a href="#js执行上下文" aria-hidden="true" class="header-anchor">#</a> js执行上下文</h1><h2 id="深入执行上下文-excution-context"><a href="#深入执行上下文-excution-context" aria-hidden="true" class="header-anchor">#</a> 深入执行上下文(Excution Context)</h2><p>众所周知,每当我们调用一个方法的时候,都会创建一个新的<code>执行上下文</code>,
+在JavaScript解释器内部,每次创建<code>执行上下文</code>都需要两个阶段</p><ul><li><strong>Creation Stage</strong>创造阶段(发生在方法被调用但是未执行任何代码之前)
+<ul><li>创建作用于链</li><li>创建变量,方法,参数</li><li>定义<code>this</code>的值</li></ul></li><li><strong>Activation / Code Execution Stage</strong>激活/代码执行阶段
+<ul><li>赋值,引用函数,解释/执行代码</li></ul></li></ul><p><code>执行上下文</code>在概念上类似于有3个属性的对象</p><pre class="language-js"><code>executionContextObj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'scopeChain'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment">/* 变量对象 + 父对象的变量对象 */</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">'variableObject'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token comment">/* 方法参数 / 内部变量 + 函数声明 */</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">'this'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="活动对象与变量对象"><a href="#活动对象与变量对象" aria-hidden="true" class="header-anchor">#</a> 活动对象与变量对象</h2><p>上面提到的<code>executionContextObj</code>,是在方法被调用但是方法并未真正执行的时候创建的.即上面提到的<code>创造阶段</code>.
+在这个阶段,解释器通过扫描方法的参数,内部函数定义和内部变量定义等 创造了<code>executionContextObj</code>.这一系列的扫描最后转变成了<code>executionContextObj</code>中的<code>variableObject变量对象</code>属性</p><p>解释器执行这个过程的伪过程大致如下:</p><ol><li>找到某些代码去调用一个方法</li><li>在执行方法代码前,先创建这个方法的<code>执行上下文 execution context</code></li><li>进入<code>创建阶段 creation stage</code><ul><li>初始化作用域链</li><li>创建<code>变量对象 variableObject</code><ul><li>创建<code>arguments 对象</code>:检查上下文中的参数,初始化他们的名称和值并且创建一个引用副本</li><li>扫描函数声明的上下文:
+<ul><li>对于每个找到的方法,在<code>变量对象 variableObject</code>中用其名称为其创建一个属性,这个属性包含了一个指向这个方法在内存中的引用指针</li><li>如果方法名已经存在,则指针的值会被覆盖</li></ul></li><li>扫描变量声明的上下文:
+<ul><li>对于每个找到的变量声明,同样以其名字在<code>变量对象 variableObject</code>为其创建一个变量,同时将其的值初始化为<code>undefined</code></li><li>如果变量名已经存在了,则什么都不做,继续扫描下一个</li></ul></li><li>定义在这个当前上下文中<code>this</code>的值</li></ul></li></ul></li><li>进入<code>激活/代码执行阶段 Activation / Code Execution Stage</code><ul><li>在上下文中逐行 <code>运行/解释 Run/interpret</code> 函数代码和变量赋值</li></ul></li></ol><p>示例:</p><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> <span class="token function-variable function">b</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">privateB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>当调用了<code>foo(22)</code>之后,<code>创建阶段 creation stage</code>看起来大概就是这样子:</p><pre class="language-js"><code>fooExecutionContext <span class="token operator">=</span> <span class="token punctuation">{</span>
+    scopeChain<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    variableObject<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        arguments<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token number">0</span><span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+            length<span class="token punctuation">:</span> <span class="token number">1</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        i<span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+        c<span class="token punctuation">:</span> pointer to <span class="token keyword">function</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        a<span class="token punctuation">:</span> undefined<span class="token punctuation">,</span>
+        b<span class="token punctuation">:</span> undefined
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">this</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>如上所示,在<code>创建阶段</code>,只定义了变量名,并没有对他们赋值.
+当<code>赋值阶段</code>结束之后,执行流进入方法,方法执行完成之后, <code>激活/代码执行阶段</code>就变成了这样子的:</p><pre class="language-js"><code>fooExecutionContext <span class="token operator">=</span> <span class="token punctuation">{</span>
+    scopeChain<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    variableObject<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        arguments<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token number">0</span><span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+            length<span class="token punctuation">:</span> <span class="token number">1</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        i<span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+        c<span class="token punctuation">:</span> pointer to <span class="token keyword">function</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        a<span class="token punctuation">:</span> <span class="token string">'hello'</span><span class="token punctuation">,</span>
+        b<span class="token punctuation">:</span> pointer to <span class="token keyword">function</span> <span class="token function">privateB</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">this</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="hoisting-关于提升"><a href="#hoisting-关于提升" aria-hidden="true" class="header-anchor">#</a> Hoisting,关于提升</h2><p>网上有很多关<code>变量提升</code>的文章,解释了<code>提升</code>是什么:变量定义会被提升到方法作用域的顶部.但是,都没有解释为什么会发生提升.当理解了解释器如果创建 <code>activation object</code>后,就会明白为什么会发生提升了</p><pre class="language-js"><code><span class="token function">​</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> foo<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// function pointer</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> bar<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+
+    <span class="token keyword">var</span> foo <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">bar</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token string">'world'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>​
+</code></pre><p>现在我们可以回答一下问题:</p><ul><li>为什么我们可以在foo定义之前去访问它?
+<ul><li>因为在<code>创建阶段</code>,<code>激活/代码执行阶段</code>之前变量都已经被创建了,在代码开始运行的时候,foo已经在<code>activation object</code>中被定义了.是一个指针引用</li></ul></li><li>Foo被定义了两次,为什么foo显示的是<code>function</code>而不是<code>undefined</code>或者<code>string</code><ul><li>即便foo定义了两次,但是我们知道在<code>创建阶段</code>方法在变量之前被创建.所以当<code>var foo</code>被扫描到的时候foo已经存在,而且是一个指向function foo()的指针.所以在<code>创建阶段</code>变量处理的过程中,遇到已经定义的foo,js什么也不会做.</li></ul></li><li>为什么bar是undefined呢?
+<ul><li>因为bar实际是一个变量,做了一次匿名函数的赋值,所以bar在<code>创建阶段</code>的时候以变量的方式处理,处理为<code>undefined</code></li></ul></li></ul></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/blogs/coding/javascript/eventloop.html" class="prev">
+          JS的事件循环机制
+        </a></span><span class="next"><a href="/blogs/coding/css/">
+          样式
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/assets/js/6.d6f69829.js" defer></script><script src="/assets/js/app.551103d0.js" defer></script>
+  </body>
+</html>
